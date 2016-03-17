@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width" name="viewport">
+    <link rel="stylesheet" href="style/style.css"/>
+</head>
+<body>
+<div class="app">
+    <div class="header">
+        <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+        <a class="result">
+            <p>
+                <span class="me">5</span>:<span>0</span>
+            </p>
+            <span class="dashed"><span>Обнулить</span></span>
+        </a>
+    </div>
+    <div class="controls">
+        <p class="status o" style="display:none;">Вы выиграли <a href="#" class="close">✕</a></p>
+        <p class="status x" style="display:none;">Вы проиграли!<a href="#" class="close">✕</a></p>
+        <p class="status" style="display:none;">Ничья!<a href="#" class="close">✕</a></p>
+        <p>
+            <button class="btn x">Начать новую игру <br> <b>Крестиком</b></button>
+            <button class="btn o">Начать новую игру <br> <b>Ноликом</b></button>
+        </p>
+    </div>
+    <div class="content">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td><button class="btn"></button></td>
+                <td><button class="btn"></button></td>
+                <td><button class="btn"></button></td>
+            </tr>
+
+            <tr>
+                <td><button class="btn x">✕</button></td>
+                <td><button class="btn o">o</button></td>
+                <td><button class="btn"></button></td>
+            </tr>
+            <tr>
+                <td><button class="btn"></button></td>
+                <td><button class="btn"></button></td>
+                <td><button class="btn"></button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="app">
+    <div class="header">
+        <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+        <a class="result">
+            <p>
+                <span class="me">5</span>:<span>0</span>
+            </p>
+            <span class="dashed"><span>Обнулить</span></span>
+        </a>
+    </div>
+    <div class="controls">
+        <p class="status o">Вы выиграли <a href="#" class="close">✕</a></p>
+        <p class="status x">Вы проиграли!<a href="#" class="close">✕</a></p>
+        <p class="status">Ничья!<a href="#" class="close">✕</a></p>
+        <p>
+            <button class="btn x">Начать новую игру <br> <b>Крестиком</b></button>
+            <button class="btn o">Начать новую игру <br> <b>Ноликом</b></button>
+        </p>
+    </div>
+    <div class="content">
+        <table class="mask" cellspacing="0" cellpadding="0">
+            <tr>
+                <td><button class="btn x win">✕</button></td>
+                <td><button class="btn o">o</button></td>
+                <td><button class="btn o">o</button></td>
+
+            </tr>
+
+            <tr>
+                <td><button class="btn o">o</button></td>
+                <td><button class="btn x win">✕</button></td>
+                <td><button class="btn o">o</button></td>
+            </tr>
+            <tr>
+                <td><button class="btn x">✕</button></td>
+                <td><button class="btn o">o</button></td>
+                <td><button class="btn x win">✕</button></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>
