@@ -188,6 +188,7 @@ a:hover {
     font-size: 1rem;
     padding: 0;
     margin: 0;
+    cursor: pointer;
 }
 
 .btn.o, .btn.x, .btn.o:active, .btn.x:active, .btn.o:hover, .btn.x:hover {
