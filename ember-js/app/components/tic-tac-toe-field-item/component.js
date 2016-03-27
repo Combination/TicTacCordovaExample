@@ -5,10 +5,13 @@ export default Ember.Component.extend(GameTypes, {
 
   selectedType: '',
 
+  selectedGameTypeObserver: function() {
+    this.set('selectedType', '');
+  }.observes('selectedGameType'),
+
   actions: {
 
     select() {
-      console.log(this.get('selectedGameType'));
       this.set('selectedType', this.get('selectedGameType'));
     }
   }

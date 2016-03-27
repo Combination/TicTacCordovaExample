@@ -8,7 +8,6 @@ export default Ember.Component.extend(GameTypes, {
   actions: {
 
     startGame(gameType) {
-      console.log(gameType);
       this.set('selectedGameType', gameType);
     }
   }
