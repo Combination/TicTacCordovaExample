@@ -5,7 +5,11 @@ import EventManaging from 'ember-js/mixins/event-managing';
 
 export default Ember.Component.extend(GameTypes, EventList, EventManaging,{
 
-  selectedGameType: '',
+  allowedToSelect: [ 0, 1, 2, 3, 4, 5, 6, 7, 8],
+
+  selectedUserGameType: '',
+
+  selectedPartnerGameType: '',
 
   registerEventListeners() {
     let eventListeners = [
@@ -29,9 +33,9 @@ export default Ember.Component.extend(GameTypes, EventList, EventManaging,{
   actions: {
 
     startGame(gameType) {
-      this.set('selectedGameType', gameType);
+      this.set('selectedUserGameType', gameType);
+      this.set('selectedPartnerGameType', this.getOppositeType(gameType));
     }
   }
-
 
 });

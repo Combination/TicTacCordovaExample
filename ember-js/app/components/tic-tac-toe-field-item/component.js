@@ -9,15 +9,17 @@ export default Ember.Component.extend(GameTypes, EventList, EventManaging, {
 
   selectedGameTypeObserver: function() {
     this.set('selectedType', '');
-  }.observes('selectedGameType'),
+  }.observes('selectedUserGameType'),
 
   actions: {
 
     select() {
-      this.set('selectedType', this.get('selectedGameType'));
+      this.set('selectedType', this.get('selectedUserGameType'));
       this.dispatchEvent({
         eventName: this.eventList.USER_HAS_SELECTED_ITEM,
-        eventObject: {}
+        eventObject: {
+          selectedIndex: this.get('index')
+        }
       });
     }
   }
