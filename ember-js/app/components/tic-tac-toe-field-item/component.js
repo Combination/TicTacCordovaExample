@@ -11,6 +11,17 @@ export default Ember.Component.extend(GameTypes, EventList, EventManaging, {
     this.set('selectedType', '');
   }.observes('selectedUserGameType'),
 
+  selectedPartnerFieldObserver: function() {
+    let selectedPartnerField =  this.get('selectedPartnerField');
+    console.log(selectedPartnerField)
+    let index = this.get('index');
+
+    if (selectedPartnerField === index) {
+      this.set('selectedType', this.get('selectedPartnerGameType'));
+    }
+  }.observes('selectedPartnerField'),
+
+
   actions: {
 
     select() {

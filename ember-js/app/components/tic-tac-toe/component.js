@@ -11,6 +11,8 @@ export default Ember.Component.extend(GameTypes, EventList, EventManaging,{
 
   selectedPartnerGameType: '',
 
+  selectedPartnerField: null,
+
   registerEventListeners() {
     let eventListeners = [
       {
@@ -26,7 +28,7 @@ export default Ember.Component.extend(GameTypes, EventList, EventManaging,{
   eventHandlers: {
 
     userHasSelectedItemEventDispatched(event) {
-      console.log(event);
+      this.set('selectedPartnerField', (event.selectedIndex + 1)% 9);
     }
   },
 
