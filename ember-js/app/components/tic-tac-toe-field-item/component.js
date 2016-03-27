@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import GameTypes from 'app/mixins/game-types';
+import GameTypes from 'ember-js/mixins/game-types';
 
 export default Ember.Component.extend(GameTypes, {
 
