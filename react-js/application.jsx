@@ -71,11 +71,29 @@ var Control = React.createClass({
 });
 
 var Cell = React.createClass({
+    getInitialState: function () {
+        return {
+            choose: null
+        };
+    },
+
+    handleClick: function () {
+        this.setState({
+            choose: this.props.choose.player
+        });
+    },
+
     render: function() {
-        var className = 'btn' + ' ' + this.props.choose;
+        if (this.state.choose === null) {
+            return (
+                <button onClick={this.handleClick} className="btn"></button>
+            );
+        }
+
+        var className = 'btn' + ' ' + this.state.choose.className;
 
         return (
-            <button className={className}>{this.props.name}</button>
+            <button className={className}>{this.state.choose.key}</button>
         );
     }
 });
