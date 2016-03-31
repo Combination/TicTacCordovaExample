@@ -10,8 +10,10 @@
 
         var Button = React.createClass({
             render: function() {
+                var className = 'btn' + ' ' + this.props.choose;
+
                 return (
-                    <button className="btn {this.props.choose}">Начать новую игру <br/> <b>{this.props.name}</b></button>
+                    <button className={className}>Начать новую игру <br/> <b>{this.props.name}</b></button>
                 );
             }
         });
