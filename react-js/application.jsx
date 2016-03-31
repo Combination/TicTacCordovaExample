@@ -35,8 +35,8 @@ var Control = React.createClass({
                 <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p>
-                    <ButtonChoose choose={'x'} name={'Крестиком'} />
-                    <ButtonChoose choose={'o'} name={'Ноликом'} />
+                    <ButtonChoose choose={Choose.CROSS} name={'Крестиком'} />
+                    <ButtonChoose choose={Choose.ZERO} name={'Ноликом'} />
                 </p>
             </div>
         );
@@ -65,8 +65,8 @@ var Content = React.createClass({
                             <td><Cell /></td>
                         </tr>
                         <tr>
-                            <td><Cell choose={'x'} name={'✕'}/></td>
-                            <td><Cell choose={'o'} name={'o'}/></td>
+                            <td><Cell choose={Choose.CROSS} name={'✕'}/></td>
+                            <td><Cell choose={Choose.ZERO} name={'o'}/></td>
                             <td><Cell /></td>
                         </tr>
                         <tr>
