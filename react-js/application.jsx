@@ -8,6 +8,14 @@
             }
         });
 
+        var Button = React.createClass({
+            render: function() {
+                return (
+                    <button className="btn {this.props.choose}">Начать новую игру <br/> <b>{this.props.name}</b></button>
+                );
+            }
+        });
+
         var Control = React.createClass({
             render: function() {
                 var hideStyle = {
@@ -20,8 +28,8 @@
                         <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
                         <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
                         <p>
-                            <button className="btn x">Начать новую игру <br/> <b>Крестиком</b></button>
-                            <button className="btn o">Начать новую игру <br/> <b>Ноликом</b></button>
+                            <Button choose={'x'} name={'Крестиком'} />
+                            <Button choose={'o'} name={'Ноликом'} />
                         </p>
                     </div>
                 );
