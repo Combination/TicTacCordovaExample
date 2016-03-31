@@ -45,7 +45,7 @@ var ButtonChoose = React.createClass({
         var className = 'btn' + ' ' + this.props.choose.className;
 
         return (
-            <button className={className}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
+            <button className={className} onClick={this.props.setChoose}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
         );
     }
 });
@@ -62,8 +62,8 @@ var Control = React.createClass({
                 <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p>
-                    <ButtonChoose choose={ChooseSetting.CROSS} onClick={this.props.onCrossClick} />
-                    <ButtonChoose choose={ChooseSetting.ZERO} onClick={this.props.onZeroClick} />
+                    <ButtonChoose choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
+                    <ButtonChoose choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
                 </p>
             </div>
         );
@@ -136,7 +136,7 @@ var Application = React.createClass({
         };
     },
 
-    setCrossChoose: function() {
+    handleSetCrossChoose: function() {
         this.setState({
             choose: {
                 player: ChooseSetting.CROSS,
@@ -145,7 +145,7 @@ var Application = React.createClass({
         });
     },
 
-    setZeroChoose: function() {
+    handleSetZeroChoose: function() {
         this.setState({
             choose: {
                 player: ChooseSetting.ZERO,
@@ -159,8 +159,8 @@ var Application = React.createClass({
             <div className="app">
                 <Header />
                 <Control
-                    onCrossClick={this.setCrossChoose}
-                    onZeroClick={this.setZeroChoose}
+                    onCrossClick={this.handleSetCrossChoose}
+                    onZeroClick={this.handleSetZeroChoose}
                 />
                 <Content choose={this.state.choose} />
             </div>
