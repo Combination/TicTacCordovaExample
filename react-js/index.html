@@ -13,21 +13,23 @@
 <body>
 
     <script type="text/babel">
-          var Header = React.createClass({
+        var Header = React.createClass({
             render: function () {
-              return (<h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>);
+                return (
+                    <div className="header">
+                        <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+                    </div>
+                );
             }
-          });
-          ReactDOM.render(
+        });
+
+        ReactDOM.render(
             <Header />,
-            document.getElementById('js-react-header')
-          );
+            document.getElementById('js-app')
+        );
     </script>
 
-    <div class="app">
-        <div id="js-react-header" class="header">
-
-        </div>
+    <div id="js-app" class="app">
         <div class="controls">
             <p class="status o" style="display:none;">Вы выиграли <a href="javascript:void(0)" class="close">✕</a></p>
             <p class="status x" style="display:none;">Вы проиграли!<a href="javascript:void(0)" class="close">✕</a></p>
