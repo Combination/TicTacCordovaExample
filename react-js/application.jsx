@@ -3,11 +3,25 @@ var Choose = {
     ZERO: 'o'
 };
 
+var Result = React.createClass({
+    render: function () {
+        return (
+            <a className="result">
+                <p>
+                    <span className="me">{this.props.player}</span>:<span>{this.props.partner}</span>
+                </p>
+                <span className="dashed"><span>Обнулить</span></span>
+            </a>
+        );
+    }
+});
+
 var Header = React.createClass({
     render: function () {
         return (
             <div className="header">
                 <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+                <Result player={1} partner={1} />
             </div>
         );
     }
