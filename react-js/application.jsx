@@ -3,6 +3,19 @@ var Choose = {
     ZERO: 'o'
 };
 
+var ChooseSetting = {
+    CROSS: {
+        key: Choose.CROSS,
+        name: 'Крестиком',
+        className: Choose.CROSS
+    },
+    ZERO: {
+        key: Choose.ZERO,
+        name: 'Ноликом',
+        className: Choose.ZERO
+    }
+};
+
 var Result = React.createClass({
     render: function () {
         return (
@@ -29,10 +42,10 @@ var Header = React.createClass({
 
 var ButtonChoose = React.createClass({
     render: function() {
-        var className = 'btn' + ' ' + this.props.choose;
+        var className = 'btn' + ' ' + this.props.choose.className;
 
         return (
-            <button className={className}>Начать новую игру <br/> <b>{this.props.name}</b></button>
+            <button className={className}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
         );
     }
 });
@@ -49,8 +62,8 @@ var Control = React.createClass({
                 <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p>
-                    <ButtonChoose choose={Choose.CROSS} name={'Крестиком'} onClick={this.props.onCrossClick} />
-                    <ButtonChoose choose={Choose.ZERO} name={'Ноликом'} onClick={this.props.onZeroClick} />
+                    <ButtonChoose choose={ChooseSetting.CROSS} onClick={this.props.onCrossClick} />
+                    <ButtonChoose choose={ChooseSetting.ZERO} onClick={this.props.onZeroClick} />
                 </p>
             </div>
         );
@@ -74,19 +87,19 @@ var Content = React.createClass({
                 <table cellSpacing="0" cellPadding="0">
                     <tbody>
                         <tr>
-                            <td><Cell /></td>
-                            <td><Cell /></td>
-                            <td><Cell /></td>
+                            <td><Cell choose={this.props.choose} /></td>
+                            <td><Cell choose={this.props.choose} /></td>
+                            <td><Cell choose={this.props.choose} /></td>
                         </tr>
                         <tr>
-                            <td><Cell choose={Choose.CROSS} name={'✕'}/></td>
-                            <td><Cell choose={Choose.ZERO} name={'o'}/></td>
-                            <td><Cell /></td>
+                            <td><Cell choose={this.props.choose} /></td>
+                            <td><Cell choose={this.props.choose} /></td>
+                            <td><Cell choose={this.props.choose} /></td>
                         </tr>
                         <tr>
-                            <td><Cell /></td>
-                            <td><Cell /></td>
-                            <td><Cell /></td>
+                            <td><Cell choose={this.props.choose} /></td>
+                            <td><Cell choose={this.props.choose} /></td>
+                            <td><Cell choose={this.props.choose} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -98,19 +111,28 @@ var Content = React.createClass({
 var Application = React.createClass({
     getInitialState: function() {
         return {
-            choose: Choose.CROSS
+            choose: {
+                player: ChooseSetting.CROSS,
+                partner: ChooseSetting.ZERO
+            }
         };
     },
 
     setCrossChoose: function() {
         this.setState({
-            choose: Choose.CROSS
+            choose: {
+                player: ChooseSetting.CROSS,
+                partner: ChooseSetting.ZERO
+            }
         });
     },
 
     setZeroChoose: function() {
         this.setState({
-            choose: Choose.ZERO
+            choose: {
+                player: ChooseSetting.ZERO,
+                partner: ChooseSetting.CROSS
+            }
         });
     },
 
@@ -122,7 +144,7 @@ var Application = React.createClass({
                     onCrossClick={this.setCrossChoose}
                     onZeroClick={this.setZeroChoose}
                 />
-                <Content />
+                <Content choose={this.state.choose} />
             </div>
         );
     }
