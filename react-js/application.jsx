@@ -88,11 +88,26 @@ var Application = React.createClass({
         };
     },
 
+    setCrossChoose: function() {
+        this.setState({
+            choose: Choose.CROSS
+        });
+    },
+
+    setZeroChoose: function() {
+        this.setState({
+            choose: Choose.ZERO
+        });
+    },
+
     render: function() {
         return (
             <div className="app">
                 <Header />
-                <Control choose={this.state.choose} />
+                <Control
+                    onCrossClick={this.setCrossChoose}
+                    onZeroClick={this.setZeroChoose}
+                />
                 <Content />
             </div>
         );
