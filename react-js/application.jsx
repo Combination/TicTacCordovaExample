@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width" name="viewport">
-    <link rel="stylesheet" href="style.css"/>
-    <script src="vendor/react.js"></script>
-    <script src="vendor/react-dom.js"></script>
-    <script src="vendor/browser.js"></script>
-</head>
-<body>
-    <div id="js-app"></div>
-
-    <script type="text/babel">
         var Header = React.createClass({
             render: function () {
                 return (
@@ -87,6 +73,3 @@
             <Application />,
             document.getElementById('js-app')
         );
-    </script>
-</body>
-</html>
