@@ -82,11 +82,17 @@ var Content = React.createClass({
 });
 
 var Application = React.createClass({
+    getInitialState: function() {
+        return {
+            choose: Choose.CROSS
+        };
+    },
+
     render: function() {
         return (
             <div className="app">
                 <Header />
-                <Control />
+                <Control choose={this.state.choose} />
                 <Content />
             </div>
         );
