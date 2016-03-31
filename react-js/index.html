@@ -23,8 +23,16 @@
             }
         });
 
+        var Application = React.createClass({
+            render: function() {
+                return (
+                    <Header />
+                );
+            }
+        });
+
         ReactDOM.render(
-            <Header />,
+            <Application />,
             document.getElementById('js-app')
         );
     </script>
