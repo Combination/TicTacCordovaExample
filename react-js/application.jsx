@@ -49,8 +49,8 @@ var Control = React.createClass({
                 <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
                 <p>
-                    <ButtonChoose choose={Choose.CROSS} name={'Крестиком'} />
-                    <ButtonChoose choose={Choose.ZERO} name={'Ноликом'} />
+                    <ButtonChoose choose={Choose.CROSS} name={'Крестиком'} onClick={this.props.onCrossClick} />
+                    <ButtonChoose choose={Choose.ZERO} name={'Ноликом'} onClick={this.props.onZeroClick} />
                 </p>
             </div>
         );
