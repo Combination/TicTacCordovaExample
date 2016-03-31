@@ -28,12 +28,42 @@
             }
         });
 
+        var Content = React.createClass({
+            render: function() {
+                return (
+                    <div className="content">
+                        <table cellSpacing="0" cellPadding="0">
+                            <tbody>
+                                <tr>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                </tr>
+
+                                <tr>
+                                    <td><button className="btn x">✕</button></td>
+                                    <td><button className="btn o">o</button></td>
+                                    <td><button className="btn"></button></td>
+                                </tr>
+                                <tr>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            }
+        });
+
         var Application = React.createClass({
             render: function() {
                 return (
                     <div className="app">
                         <Header />
                         <Control />
+                        <Content />
                     </div>
                 );
             }

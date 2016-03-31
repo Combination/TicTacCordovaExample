@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta content="width=device-width" name="viewport">
     <link rel="stylesheet" href="style.css"/>
-
     <script src="vendor/react.js"></script>
     <script src="vendor/react-dom.js"></script>
     <script src="vendor/browser.js"></script>
-
 </head>
 <body>
+    <div id="js-app"></div>
 
     <script type="text/babel">
         var Header = React.createClass({
@@ -43,12 +42,42 @@
             }
         });
 
+        var Content = React.createClass({
+            render: function() {
+                return (
+                    <div className="content">
+                        <table cellSpacing="0" cellPadding="0">
+                            <tbody>
+                                <tr>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                </tr>
+
+                                <tr>
+                                    <td><button className="btn x">✕</button></td>
+                                    <td><button className="btn o">o</button></td>
+                                    <td><button className="btn"></button></td>
+                                </tr>
+                                <tr>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                    <td><button className="btn"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            }
+        });
+
         var Application = React.createClass({
             render: function() {
                 return (
                     <div className="app">
                         <Header />
                         <Control />
+                        <Content />
                     </div>
                 );
             }
@@ -59,37 +88,5 @@
             document.getElementById('js-app')
         );
     </script>
-
-    <div id="js-app">
-        <div class="controls">
-            <p class="status o" style="display:none;">Вы выиграли <a href="javascript:void(0)" class="close">✕</a></p>
-            <p class="status x" style="display:none;">Вы проиграли!<a href="javascript:void(0)" class="close">✕</a></p>
-            <p class="status" style="display:none;">Ничья!<a href="javascript:void(0)" class="close">✕</a></p>
-            <p>
-                <button class="btn x">Начать новую игру <br> <b>Крестиком</b></button>
-                <button class="btn o">Начать новую игру <br> <b>Ноликом</b></button>
-            </p>
-        </div>
-        <div class="content">
-            <table cellspacing="0" cellpadding="0">
-                <tr>
-                    <td><button class="btn"></button></td>
-                    <td><button class="btn"></button></td>
-                    <td><button class="btn"></button></td>
-                </tr>
-
-                <tr>
-                    <td><button class="btn x">✕</button></td>
-                    <td><button class="btn o">o</button></td>
-                    <td><button class="btn"></button></td>
-                </tr>
-                <tr>
-                    <td><button class="btn"></button></td>
-                    <td><button class="btn"></button></td>
-                    <td><button class="btn"></button></td>
-                </tr>
-            </table>
-        </div>
-    </div>
 </body>
 </html>
