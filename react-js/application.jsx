@@ -40,7 +40,7 @@ var Header = React.createClass({
     }
 });
 
-var ButtonChoose = React.createClass({
+var ChooseButton = React.createClass({
     render: function() {
         var className = 'btn' + ' ' + this.props.choose.className;
 
@@ -50,20 +50,28 @@ var ButtonChoose = React.createClass({
     }
 });
 
+var CloseButton = React.createClass({
+    render() {
+        return (
+            <a href="javascript:void(0)" className="close">✕</a>
+        );
+    }
+});
+
 var Control = React.createClass({
     render: function() {
         var hideStyle = {
-            display:'none'
+            display:'visible'
         };
 
         return (
             <div className="controls">
-                <p className="status o" style={hideStyle}>Вы выиграли <a href="javascript:void(0)" className="close">✕</a></p>
-                <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
-                <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
+                <p className="status o" style={hideStyle}>Вы выиграли <CloseButton /></p>
+                <p className="status x" style={hideStyle}>Вы проиграли!<CloseButton /></p>
+                <p className="status" style={hideStyle}>Ничья!<CloseButton /></p>
                 <p>
-                    <ButtonChoose choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
-                    <ButtonChoose choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
+                    <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
+                    <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
                 </p>
             </div>
         );
