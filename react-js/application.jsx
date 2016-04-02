@@ -17,14 +17,41 @@ const ChooseSetting = {
 };
 
 const Result = React.createClass({
+    propTypes: {
+        player: React.PropTypes.number.isRequired,
+        partner: React.PropTypes.number.isRequired
+    },
+
+    componentWillMount: function(nextProps) {
+        this.setState({
+            player: this.props.player,
+            partner: this.props.partner
+        });
+    },
+
+    handleReset: function() {
+        this.setState({
+            player: 0,
+            partner: 0
+        });
+    },
+
     render: function () {
         return (
-            <a className="result">
+            <a className="result" onClick={this.handleReset}>
                 <p>
-                    <span className="me">{this.props.player}</span>:<span>{this.props.partner}</span>
+                    <span className="me">{this.state.player}</span>:<span>{this.state.partner}</span>
                 </p>
                 <span className="dashed"><span>Обнулить</span></span>
             </a>
+        );
+    }
+});
+
+const Title = React.createClass({
+    render: function() {
+        return (
+            <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
         );
     }
 });
@@ -33,7 +60,7 @@ const Header = React.createClass({
     render: function () {
         return (
             <div className="header">
-                <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+                <Title />
                 <Result player={1} partner={1} />
             </div>
         );
@@ -59,6 +86,11 @@ const CloseButton = React.createClass({
 });
 
 const Status = React.createClass({
+    propTypes: {
+        message: React.PropTypes.string.isRequired,
+        choose: React.PropTypes.string
+    },
+
     getInitialState: function() {
         return {
             display: 'none'
@@ -92,9 +124,9 @@ const Control = React.createClass({
     render: function() {
         return (
             <div className="controls">
-                <Status choose={'o'} message={'Вы выиграли!'} />
-                <Status choose={'x'} message={'Вы проиграли!'} />
-                <Status message={'Ничья!'} />
+                <Status choose={ChooseSetting.ZERO.className} message='Вы выиграли!' />
+                <Status choose={ChooseSetting.CROSS.className} message='Вы проиграли!' />
+                <Status message='Ничья!' />
                 <p>
                     <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
                     <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
