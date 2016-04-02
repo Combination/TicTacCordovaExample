@@ -59,6 +59,11 @@ const CloseButton = React.createClass({
 });
 
 const Status = React.createClass({
+    propTypes: {
+        message: React.PropTypes.string.isRequired,
+        choose: React.PropTypes.string
+    },
+
     getInitialState: function() {
         return {
             display: 'none'
