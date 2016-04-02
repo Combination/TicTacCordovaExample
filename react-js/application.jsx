@@ -17,6 +17,11 @@ const ChooseSetting = {
 };
 
 const Result = React.createClass({
+    propTypes: {
+        player: React.PropTypes.number.isRequired,
+        partner: React.PropTypes.number.isRequired
+    },
+
     render: function () {
         return (
             <a className="result">
