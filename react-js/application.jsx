@@ -61,7 +61,7 @@ const CloseButton = React.createClass({
 const Status = React.createClass({
     getInitialState: function() {
         return {
-            display: 'visible'
+            display: 'none'
         };
     },
 
@@ -134,25 +134,21 @@ const Cell = React.createClass({
 
 const Content = React.createClass({
     render: function() {
+        var row = (
+            <tr>
+                <td><Cell choose={this.props.choose} /></td>
+                <td><Cell choose={this.props.choose} /></td>
+                <td><Cell choose={this.props.choose} /></td>
+            </tr>
+        );
+
         return (
             <div className="content">
                 <table cellSpacing="0" cellPadding="0">
                     <tbody>
-                        <tr>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                        </tr>
-                        <tr>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                        </tr>
-                        <tr>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                        </tr>
+                        {row}
+                        {row}
+                        {row}
                     </tbody>
                 </table>
             </div>
