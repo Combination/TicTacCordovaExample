@@ -34,11 +34,19 @@ const Result = React.createClass({
     }
 });
 
+const Title = React.createClass({
+    render: function() {
+        return (
+            <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+        );
+    }
+});
+
 const Header = React.createClass({
     render: function () {
         return (
             <div className="header">
-                <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
+                <Title />
                 <Result player={1} partner={1} />
             </div>
         );
@@ -102,9 +110,9 @@ const Control = React.createClass({
     render: function() {
         return (
             <div className="controls">
-                <Status choose={'o'} message={'Вы выиграли!'} />
-                <Status choose={'x'} message={'Вы проиграли!'} />
-                <Status message={'Ничья!'} />
+                <Status choose={ChooseSetting.ZERO.className} message='Вы выиграли!' />
+                <Status choose={ChooseSetting.CROSS.className} message='Вы проиграли!' />
+                <Status message='Ничья!' />
                 <p>
                     <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
                     <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
