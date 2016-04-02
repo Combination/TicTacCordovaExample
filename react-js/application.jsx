@@ -53,15 +53,27 @@ const ChooseButton = React.createClass({
 const CloseButton = React.createClass({
     render() {
         return (
-            <a href="javascript:void(0)" className="close">✕</a>
+            <a href="javascript:void(0)" className="close" onClick={this.props.action}>✕</a>
         );
     }
 });
 
 const Status = React.createClass({
+    getInitialState: function() {
+        return {
+            display: 'visible'
+        };
+    },
+
+    handleClose: function() {
+        this.setState({
+            display: 'hide'
+        });
+    },
+
     render: function() {
         var hideStyle = {
-            display:'visible'
+            display: this.state.display
         };
 
         var className = 'status';
@@ -71,7 +83,7 @@ const Status = React.createClass({
         }
 
         return (
-            <p className={className} style={hideStyle}>{this.props.message}<CloseButton /></p>
+            <p className={className} style={hideStyle}>{this.props.message}<CloseButton action={this.handleClose} /></p>
         );
     }
 });
