@@ -138,9 +138,7 @@ const Control = React.createClass({
 
 const Cell = React.createClass({
     componentWillReceiveProps: function() {
-        this.setState({
-            choose: null
-        });
+        this.setState(this.getInitialState);
     },
 
     getInitialState: function () {
