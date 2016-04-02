@@ -1,9 +1,9 @@
-var Choose = {
+const Choose = {
     CROSS: 'x',
     ZERO: 'o'
 };
 
-var ChooseSetting = {
+const ChooseSetting = {
     CROSS: {
         key: Choose.CROSS,
         name: 'Крестиком',
@@ -16,7 +16,7 @@ var ChooseSetting = {
     }
 };
 
-var Result = React.createClass({
+const Result = React.createClass({
     render: function () {
         return (
             <a className="result">
@@ -29,7 +29,7 @@ var Result = React.createClass({
     }
 });
 
-var Header = React.createClass({
+const Header = React.createClass({
     render: function () {
         return (
             <div className="header">
@@ -40,7 +40,7 @@ var Header = React.createClass({
     }
 });
 
-var ChooseButton = React.createClass({
+const ChooseButton = React.createClass({
     render: function() {
         var className = 'btn' + ' ' + this.props.choose.className;
 
@@ -50,7 +50,7 @@ var ChooseButton = React.createClass({
     }
 });
 
-var CloseButton = React.createClass({
+const CloseButton = React.createClass({
     render() {
         return (
             <a href="javascript:void(0)" className="close">✕</a>
@@ -58,7 +58,7 @@ var CloseButton = React.createClass({
     }
 });
 
-var Control = React.createClass({
+const Control = React.createClass({
     render: function() {
         var hideStyle = {
             display:'visible'
@@ -78,7 +78,7 @@ var Control = React.createClass({
     }
 });
 
-var Cell = React.createClass({
+const Cell = React.createClass({
     getInitialState: function () {
         return {
             choose: null
@@ -106,7 +106,7 @@ var Cell = React.createClass({
     }
 });
 
-var Content = React.createClass({
+const Content = React.createClass({
     render: function() {
         return (
             <div className="content">
@@ -134,7 +134,7 @@ var Content = React.createClass({
     }
 });
 
-var Application = React.createClass({
+const Application = React.createClass({
     getInitialState: function() {
         return {
             choose: {
