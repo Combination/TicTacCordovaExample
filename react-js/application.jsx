@@ -22,7 +22,7 @@ const Result = React.createClass({
         partner: React.PropTypes.number.isRequired
     },
 
-    componentWillMount: function(nextProps) {
+    componentWillMount: function() {
         this.setState({
             player: this.props.player,
             partner: this.props.partner
