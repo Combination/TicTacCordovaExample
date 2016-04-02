@@ -137,6 +137,12 @@ const Control = React.createClass({
 });
 
 const Cell = React.createClass({
+    componentWillReceiveProps: function() {
+        this.setState({
+            choose: null
+        });
+    },
+
     getInitialState: function () {
         return {
             choose: null
