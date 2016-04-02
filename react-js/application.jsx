@@ -22,11 +22,25 @@ const Result = React.createClass({
         partner: React.PropTypes.number.isRequired
     },
 
+    componentWillMount: function(nextProps) {
+        this.setState({
+            player: this.props.player,
+            partner: this.props.partner
+        });
+    },
+
+    handleReset: function() {
+        this.setState({
+            player: 0,
+            partner: 0
+        });
+    },
+
     render: function () {
         return (
-            <a className="result">
+            <a className="result" onClick={this.handleReset}>
                 <p>
-                    <span className="me">{this.props.player}</span>:<span>{this.props.partner}</span>
+                    <span className="me">{this.state.player}</span>:<span>{this.state.partner}</span>
                 </p>
                 <span className="dashed"><span>Обнулить</span></span>
             </a>
