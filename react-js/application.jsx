@@ -1,9 +1,9 @@
-var Choose = {
+const Choose = {
     CROSS: 'x',
     ZERO: 'o'
 };
 
-var ChooseSetting = {
+const ChooseSetting = {
     CROSS: {
         key: Choose.CROSS,
         name: 'Крестиком',
@@ -16,7 +16,7 @@ var ChooseSetting = {
     }
 };
 
-var Result = React.createClass({
+const Result = React.createClass({
     render: function () {
         return (
             <a className="result">
@@ -29,7 +29,7 @@ var Result = React.createClass({
     }
 });
 
-var Header = React.createClass({
+const Header = React.createClass({
     render: function () {
         return (
             <div className="header">
@@ -40,7 +40,7 @@ var Header = React.createClass({
     }
 });
 
-var ButtonChoose = React.createClass({
+const ChooseButton = React.createClass({
     render: function() {
         var className = 'btn' + ' ' + this.props.choose.className;
 
@@ -50,27 +50,61 @@ var ButtonChoose = React.createClass({
     }
 });
 
-var Control = React.createClass({
+const CloseButton = React.createClass({
+    render() {
+        return (
+            <a href="javascript:void(0)" className="close" onClick={this.props.action}>✕</a>
+        );
+    }
+});
+
+const Status = React.createClass({
+    getInitialState: function() {
+        return {
+            display: 'none'
+        };
+    },
+
+    handleClose: function() {
+        this.setState({
+            display: 'none'
+        });
+    },
+
     render: function() {
         var hideStyle = {
-            display:'none'
+            display: this.state.display
         };
 
+        var className = 'status';
+
+        if (this.props.choose) {
+            className += ' ' + this.props.choose;
+        }
+
+        return (
+            <p className={className} style={hideStyle}>{this.props.message}<CloseButton action={this.handleClose} /></p>
+        );
+    }
+});
+
+const Control = React.createClass({
+    render: function() {
         return (
             <div className="controls">
-                <p className="status o" style={hideStyle}>Вы выиграли <a href="javascript:void(0)" className="close">✕</a></p>
-                <p className="status x" style={hideStyle}>Вы проиграли!<a href="javascript:void(0)" className="close">✕</a></p>
-                <p className="status" style={hideStyle}>Ничья!<a href="javascript:void(0)" className="close">✕</a></p>
+                <Status choose={'o'} message={'Вы выиграли!'} />
+                <Status choose={'x'} message={'Вы проиграли!'} />
+                <Status message={'Ничья!'} />
                 <p>
-                    <ButtonChoose choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
-                    <ButtonChoose choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
+                    <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
+                    <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
                 </p>
             </div>
         );
     }
 });
 
-var Cell = React.createClass({
+const Cell = React.createClass({
     getInitialState: function () {
         return {
             choose: null
@@ -98,27 +132,23 @@ var Cell = React.createClass({
     }
 });
 
-var Content = React.createClass({
+const Content = React.createClass({
     render: function() {
+        var row = (
+            <tr>
+                <td><Cell choose={this.props.choose} /></td>
+                <td><Cell choose={this.props.choose} /></td>
+                <td><Cell choose={this.props.choose} /></td>
+            </tr>
+        );
+
         return (
             <div className="content">
                 <table cellSpacing="0" cellPadding="0">
                     <tbody>
-                        <tr>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                        </tr>
-                        <tr>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                        </tr>
-                        <tr>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                            <td><Cell choose={this.props.choose} /></td>
-                        </tr>
+                        {row}
+                        {row}
+                        {row}
                     </tbody>
                 </table>
             </div>
@@ -126,7 +156,7 @@ var Content = React.createClass({
     }
 });
 
-var Application = React.createClass({
+const Application = React.createClass({
     getInitialState: function() {
         return {
             choose: {
