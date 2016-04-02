@@ -67,7 +67,7 @@ const Status = React.createClass({
 
     handleClose: function() {
         this.setState({
-            display: 'hide'
+            display: 'none'
         });
     },
 
@@ -90,10 +90,6 @@ const Status = React.createClass({
 
 const Control = React.createClass({
     render: function() {
-        var hideStyle = {
-            display:'visible'
-        };
-
         return (
             <div className="controls">
                 <Status choose={'o'} message={'Вы выиграли!'} />
