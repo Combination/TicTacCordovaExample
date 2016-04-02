@@ -58,6 +58,24 @@ const CloseButton = React.createClass({
     }
 });
 
+const Status = React.createClass({
+    render: function() {
+        var hideStyle = {
+            display:'visible'
+        };
+
+        var className = 'status';
+
+        if (this.props.choose) {
+            className += ' ' + this.props.choose;
+        }
+
+        return (
+            <p className={className} style={hideStyle}>{this.props.message}<CloseButton /></p>
+        );
+    }
+});
+
 const Control = React.createClass({
     render: function() {
         var hideStyle = {
@@ -66,9 +84,9 @@ const Control = React.createClass({
 
         return (
             <div className="controls">
-                <p className="status o" style={hideStyle}>Вы выиграли <CloseButton /></p>
-                <p className="status x" style={hideStyle}>Вы проиграли!<CloseButton /></p>
-                <p className="status" style={hideStyle}>Ничья!<CloseButton /></p>
+                <Status choose={'o'} message={'Вы выиграли!'} />
+                <Status choose={'x'} message={'Вы проиграли!'} />
+                <Status message={'Ничья!'} />
                 <p>
                     <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
                     <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
