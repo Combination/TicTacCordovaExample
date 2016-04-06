@@ -177,15 +177,15 @@ const Cell = React.createClass({
 const Content = React.createClass({
     render: function() {
         let matrixStateList = [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
+            null,
+            null,
+            null,
+            null,
+            ChooseSetting.CROSS,
+            null,
+            null,
+            null,
+            null
         ];
 
         let rows = [];
@@ -193,8 +193,15 @@ const Content = React.createClass({
         for (let i = 0; i < 3; ++i) {
             var cols = [];
             for (let j = 0; j < 3; ++j) {
+                let index = i * 3 + j;
                 cols.push(
-                    <td><Cell choose={this.props.choose} /></td>
+                    <td>
+                        <Cell
+                            key={index}
+                            select={matrixStateList[index]}
+                            choose={this.props.choose}
+                        />
+                    </td>
                 );
             }
 
