@@ -69,7 +69,7 @@ const Header = React.createClass({
 
 const ChooseButton = React.createClass({
     render: function() {
-        var className = 'btn' + ' ' + this.props.choose.className;
+        let className = 'btn' + ' ' + this.props.choose.className;
 
         return (
             <button className={className} onClick={this.props.setChoose}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
@@ -108,7 +108,7 @@ const Status = React.createClass({
             display: this.state.display
         };
 
-        var className = 'status';
+        let className = 'status';
 
         if (this.props.choose) {
             className += ' ' + this.props.choose;
@@ -160,7 +160,7 @@ const Cell = React.createClass({
             );
         }
 
-        var className = 'btn' + ' ' + this.state.choose.className;
+        let className = 'btn' + ' ' + this.state.choose.className;
 
         return (
             <button className={className}>{this.state.choose.key}</button>
@@ -170,7 +170,7 @@ const Cell = React.createClass({
 
 const Content = React.createClass({
     render: function() {
-        var row = (
+        let row = (
             <tr>
                 <td><Cell choose={this.props.choose} /></td>
                 <td><Cell choose={this.props.choose} /></td>
