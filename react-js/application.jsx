@@ -141,9 +141,15 @@ const Cell = React.createClass({
         this.setState(this.getInitialState);
     },
 
+    getDefaultProps: function() {
+        return {
+            select: null
+        };
+    },
+
     getInitialState: function () {
         return {
-            choose: null
+            choose: this.props.select
         };
     },
 
@@ -170,21 +176,38 @@ const Cell = React.createClass({
 
 const Content = React.createClass({
     render: function() {
-        let row = (
-            <tr>
-                <td><Cell choose={this.props.choose} /></td>
-                <td><Cell choose={this.props.choose} /></td>
-                <td><Cell choose={this.props.choose} /></td>
-            </tr>
-        );
+        let matrixStateList = [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ];
+
+        let rows = [];
+
+        for (let i = 0; i < 3; ++i) {
+            var cols = [];
+            for (let j = 0; j < 3; ++j) {
+                cols.push(
+                    <td><Cell choose={this.props.choose} /></td>
+                );
+            }
+
+            rows.push(
+                <tr>{cols}</tr>
+            );
+        }
 
         return (
             <div className="content">
                 <table cellSpacing="0" cellPadding="0">
                     <tbody>
-                        {row}
-                        {row}
-                        {row}
+                        {rows}
                     </tbody>
                 </table>
             </div>
