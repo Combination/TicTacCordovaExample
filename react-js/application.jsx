@@ -22,7 +22,7 @@ const Result = React.createClass({
         partner: React.PropTypes.number.isRequired
     },
 
-    componentWillMount: function(nextProps) {
+    componentWillMount: function() {
         this.setState({
             player: this.props.player,
             partner: this.props.partner
@@ -69,7 +69,7 @@ const Header = React.createClass({
 
 const ChooseButton = React.createClass({
     render: function() {
-        var className = 'btn' + ' ' + this.props.choose.className;
+        let className = 'btn' + ' ' + this.props.choose.className;
 
         return (
             <button className={className} onClick={this.props.setChoose}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
@@ -108,7 +108,7 @@ const Status = React.createClass({
             display: this.state.display
         };
 
-        var className = 'status';
+        let className = 'status';
 
         if (this.props.choose) {
             className += ' ' + this.props.choose;
@@ -141,16 +141,20 @@ const Cell = React.createClass({
         this.setState(this.getInitialState);
     },
 
+    getDefaultProps: function() {
+        return {
+            select: null
+        };
+    },
+
     getInitialState: function () {
         return {
-            choose: null
+            choose: this.props.select
         };
     },
 
     handleClick: function () {
-        this.setState({
-            choose: this.props.choose.player
-        });
+        this.props.onClick(this.props.index, this.props.choose);
     },
 
     render: function() {
@@ -160,31 +164,54 @@ const Cell = React.createClass({
             );
         }
 
-        var className = 'btn' + ' ' + this.state.choose.className;
+        let className = 'btn' + ' ' + this.state.choose.className;
 
         return (
-            <button className={className}>{this.state.choose.key}</button>
+            <button key={this.props.index} className={className}>{this.state.choose.key}</button>
         );
     }
 });
 
 const Content = React.createClass({
+    componentWillReceiveProps: function() {
+        this.setState(this.getInitialState());
+    },
+
+    getInitialState: function () {
+        return {};
+    },
+
     render: function() {
-        var row = (
-            <tr>
-                <td><Cell choose={this.props.choose} /></td>
-                <td><Cell choose={this.props.choose} /></td>
-                <td><Cell choose={this.props.choose} /></td>
-            </tr>
-        );
+        let matrixStateList = this.props.matrix;
+
+        let rows = [];
+
+        for (let i = 0; i < 3; ++i) {
+            var cols = [];
+            for (let j = 0; j < 3; ++j) {
+                let index = i * 3 + j;
+                cols.push(
+                    <td>
+                        <Cell
+                            index={index}
+                            select={matrixStateList[index]}
+                            choose={this.props.choose.player}
+                            onClick={this.props.onClickPoint}
+                        />
+                    </td>
+                );
+            }
+
+            rows.push(
+                <tr>{cols}</tr>
+            );
+        }
 
         return (
             <div className="content">
                 <table cellSpacing="0" cellPadding="0">
                     <tbody>
-                        {row}
-                        {row}
-                        {row}
+                        {rows}
                     </tbody>
                 </table>
             </div>
@@ -198,6 +225,9 @@ const Application = React.createClass({
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
+            },
+            matrix: {
+
             }
         };
     },
@@ -207,6 +237,9 @@ const Application = React.createClass({
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
+            },
+            matrix: {
+
             }
         });
     },
@@ -216,7 +249,22 @@ const Application = React.createClass({
             choose: {
                 player: ChooseSetting.ZERO,
                 partner: ChooseSetting.CROSS
+            },
+            matrix: {
+
             }
+        });
+    },
+
+    /**
+     * TODO: WARNING wait for one point
+     * @param index
+     * @param choose
+     */
+    setMatrixPoint: function(index, choose) {
+        this.state.matrix[index] = choose;
+        this.setState({
+            matrix: this.state.matrix
         });
     },
 
@@ -228,7 +276,11 @@ const Application = React.createClass({
                     onCrossClick={this.handleSetCrossChoose}
                     onZeroClick={this.handleSetZeroChoose}
                 />
-                <Content choose={this.state.choose} />
+                <Content
+                    choose={this.state.choose}
+                    onClickPoint={this.setMatrixPoint}
+                    matrix={this.state.matrix}
+                />
             </div>
         );
     }
