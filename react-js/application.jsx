@@ -167,7 +167,7 @@ const Cell = React.createClass({
         let className = 'btn' + ' ' + this.state.choose.className;
 
         return (
-            <button key={this.props.index} className={className}>{this.state.choose.key}</button>
+            <button className={className}>{this.state.choose.key}</button>
         );
     }
 });
@@ -191,9 +191,9 @@ const Content = React.createClass({
             for (let j = 0; j < 3; ++j) {
                 let index = i * 3 + j;
                 cols.push(
-                    <td>
+                    <td key={index}>
                         <Cell
-                            index={index}
+                            key={index}
                             select={matrixStateList[index]}
                             choose={this.props.choose.player}
                             onClick={this.props.onClickPoint}
@@ -203,7 +203,7 @@ const Content = React.createClass({
             }
 
             rows.push(
-                <tr>{cols}</tr>
+                <tr key={i}>{cols}</tr>
             );
         }
 
