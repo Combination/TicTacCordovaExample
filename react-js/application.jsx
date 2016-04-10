@@ -138,19 +138,7 @@ const Control = React.createClass({
 
 const Cell = React.createClass({
     componentWillReceiveProps: function() {
-        this.setState(this.getInitialState);
-    },
-
-    getDefaultProps: function() {
-        return {
-            select: null
-        };
-    },
-
-    getInitialState: function () {
-        return {
-            choose: this.props.select
-        };
+        this.setState({});
     },
 
     handleClick: function () {
@@ -158,16 +146,16 @@ const Cell = React.createClass({
     },
 
     render: function() {
-        if (this.state.choose === null) {
+        if (this.props.select) {
+            let className = 'btn' + ' ' + this.props.choose.className;
+
             return (
-                <button onClick={this.handleClick} className="btn"></button>
+                <button className={className}>{this.props.choose.key}</button>
             );
         }
 
-        let className = 'btn' + ' ' + this.state.choose.className;
-
         return (
-            <button className={className}>{this.state.choose.key}</button>
+            <button onClick={this.handleClick} className="btn"></button>
         );
     }
 });
@@ -194,6 +182,7 @@ const Content = React.createClass({
                     <td key={index}>
                         <Cell
                             key={index}
+                            index={index}
                             select={matrixStateList[index]}
                             choose={this.props.choose.player}
                             onClick={this.props.onClickPoint}
