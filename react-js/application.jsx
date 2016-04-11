@@ -17,30 +17,11 @@ const ChooseSetting = {
 };
 
 const Result = React.createClass({
-    propTypes: {
-        player: React.PropTypes.number.isRequired,
-        partner: React.PropTypes.number.isRequired
-    },
-
-    componentWillMount: function() {
-        this.setState({
-            player: this.props.player,
-            partner: this.props.partner
-        });
-    },
-
-    handleReset: function() {
-        this.setState({
-            player: 0,
-            partner: 0
-        });
-    },
-
     render: function () {
         return (
-            <a className="result" onClick={this.handleReset}>
+            <a className="result" onClick={this.props.onResetScore}>
                 <p>
-                    <span className="me">{this.state.player}</span>:<span>{this.state.partner}</span>
+                    <span className="me">{this.props.score.player}</span>:<span>{this.props.score.partner}</span>
                 </p>
                 <span className="dashed"><span>Обнулить</span></span>
             </a>
@@ -61,7 +42,7 @@ const Header = React.createClass({
         return (
             <div className="header">
                 <Title />
-                <Result player={1} partner={1} />
+                <Result score={this.props.score} onResetScore={this.props.onResetScore} />
             </div>
         );
     }
@@ -213,6 +194,10 @@ const Application = React.createClass({
             },
             matrix: {
 
+            },
+            score: {
+                player: 1,
+                partner: 1
             }
         };
     },
@@ -253,10 +238,19 @@ const Application = React.createClass({
         });
     },
 
+    handleResetScore: function() {
+        this.setState({
+            score: {
+                player: 0,
+                partner: 0
+            }
+        })
+    },
+
     render: function() {
         return (
             <div className="app">
-                <Header />
+                <Header onResetScore={this.handleResetScore} score={this.state.score} />
                 <Control
                     onCrossClick={this.handleSetCrossChoose}
                     onZeroClick={this.handleSetZeroChoose}
