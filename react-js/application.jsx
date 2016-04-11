@@ -72,14 +72,15 @@ class Game
     start() {
         if (this.player === ChooseSetting.ZERO) {
             this.answer = new GameAnswer(this.behavior.getFirstStep(), this.partner);
+            this.answer = {
+                point: this.behavior.getFirstStep(),
+                player: this.partner
+            };
         }
     }
 
     getLastAnswer() {
-        return {
-            point: this.behavior.getFirstStep(),
-            player: this.partner
-        };
+        return this.answer;
     }
 
     setPoint() {
