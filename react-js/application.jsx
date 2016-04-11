@@ -137,10 +137,6 @@ const Control = React.createClass({
 });
 
 const Cell = React.createClass({
-    componentWillReceiveProps: function() {
-        this.setState({});
-    },
-
     handleClick: function () {
         this.props.onClick(this.props.index, this.props.choose);
     },
