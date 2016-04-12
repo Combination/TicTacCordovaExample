@@ -17,30 +17,11 @@ const ChooseSetting = {
 };
 
 const Result = React.createClass({
-    propTypes: {
-        player: React.PropTypes.number.isRequired,
-        partner: React.PropTypes.number.isRequired
-    },
-
-    componentWillMount: function() {
-        this.setState({
-            player: this.props.player,
-            partner: this.props.partner
-        });
-    },
-
-    handleReset: function() {
-        this.setState({
-            player: 0,
-            partner: 0
-        });
-    },
-
     render: function () {
         return (
-            <a className="result" onClick={this.handleReset}>
+            <a className="result" onClick={this.props.onResetScore}>
                 <p>
-                    <span className="me">{this.state.player}</span>:<span>{this.state.partner}</span>
+                    <span className="me">{this.props.score.player}</span>:<span>{this.props.score.partner}</span>
                 </p>
                 <span className="dashed"><span>Обнулить</span></span>
             </a>
@@ -61,7 +42,7 @@ const Header = React.createClass({
         return (
             <div className="header">
                 <Title />
-                <Result player={1} partner={1} />
+                <Result score={this.props.score} onResetScore={this.props.onResetScore} />
             </div>
         );
     }
@@ -137,37 +118,21 @@ const Control = React.createClass({
 });
 
 const Cell = React.createClass({
-    componentWillReceiveProps: function() {
-        this.setState(this.getInitialState);
-    },
-
-    getDefaultProps: function() {
-        return {
-            select: null
-        };
-    },
-
-    getInitialState: function () {
-        return {
-            choose: this.props.select
-        };
-    },
-
     handleClick: function () {
         this.props.onClick(this.props.index, this.props.choose);
     },
 
     render: function() {
-        if (this.state.choose === null) {
+        if (this.props.select) {
+            let className = 'btn' + ' ' + this.props.choose.className;
+
             return (
-                <button onClick={this.handleClick} className="btn"></button>
+                <button className={className}>{this.props.choose.key}</button>
             );
         }
 
-        let className = 'btn' + ' ' + this.state.choose.className;
-
         return (
-            <button key={this.props.index} className={className}>{this.state.choose.key}</button>
+            <button onClick={this.handleClick} className="btn"></button>
         );
     }
 });
@@ -191,8 +156,9 @@ const Content = React.createClass({
             for (let j = 0; j < 3; ++j) {
                 let index = i * 3 + j;
                 cols.push(
-                    <td>
+                    <td key={index}>
                         <Cell
+                            key={index}
                             index={index}
                             select={matrixStateList[index]}
                             choose={this.props.choose.player}
@@ -203,7 +169,7 @@ const Content = React.createClass({
             }
 
             rows.push(
-                <tr>{cols}</tr>
+                <tr key={i}>{cols}</tr>
             );
         }
 
@@ -228,6 +194,10 @@ const Application = React.createClass({
             },
             matrix: {
 
+            },
+            score: {
+                player: 1,
+                partner: 1
             }
         };
     },
@@ -268,10 +238,19 @@ const Application = React.createClass({
         });
     },
 
+    handleResetScore: function() {
+        this.setState({
+            score: {
+                player: 0,
+                partner: 0
+            }
+        })
+    },
+
     render: function() {
         return (
             <div className="app">
-                <Header />
+                <Header onResetScore={this.handleResetScore} score={this.state.score} />
                 <Control
                     onCrossClick={this.handleSetCrossChoose}
                     onZeroClick={this.handleSetZeroChoose}
