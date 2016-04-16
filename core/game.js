@@ -1,4 +1,4 @@
-var TicTacToe = {};
+const TicTacToe = {};
 
 TicTacToe.Game = function () {
 
