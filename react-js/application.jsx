@@ -187,6 +187,9 @@ const Content = React.createClass({
     }
 });
 
+/**
+ * @type {TicTacToe.Game}
+ */
 let game;
 
 function startGame(state) {
@@ -245,9 +248,10 @@ const Application = React.createClass({
      * @param choose
      */
     setMatrixPoint: function(index) {
-        this.state.matrix[index] = this.state.choose.player;
+        game.setPoint(index);
+
         this.setState({
-            matrix: this.state.matrix
+            matrix: game.getMatrix()
         });
     },
 
