@@ -8,7 +8,7 @@ TicTacToe.Choose.ZERO = new TicTacToe.Choose('o');
 TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
-    this.matrix = {};
+    this.matrix = [];
 };
 
 TicTacToe.Game.prototype.getMatrix = function () {
@@ -17,7 +17,6 @@ TicTacToe.Game.prototype.getMatrix = function () {
 
 TicTacToe.Game.prototype.setPoint = function (index) {
     this.matrix[index] = this.player;
-    return {};
 };
 
 // TODO: need better
