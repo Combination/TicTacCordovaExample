@@ -7,12 +7,14 @@ const ChooseSetting = {
     CROSS: {
         key: Choose.CROSS,
         name: 'Крестиком',
-        className: Choose.CROSS
+        className: Choose.CROSS,
+        instance: TicTacToe.Choose.CROSS
     },
     ZERO: {
         key: Choose.ZERO,
         name: 'Ноликом',
-        className: Choose.ZERO
+        className: Choose.ZERO,
+        instance: TicTacToe.Choose.ZERO
     }
 };
 
@@ -119,7 +121,7 @@ const Control = React.createClass({
 
 const Cell = React.createClass({
     handleClick: function () {
-        this.props.onClick(this.props.index, this.props.choose);
+        this.props.onClick(this.props.index);
     },
 
     render: function() {
@@ -229,8 +231,8 @@ const Application = React.createClass({
      * @param index
      * @param choose
      */
-    setMatrixPoint: function(index, choose) {
-        this.state.matrix[index] = choose;
+    setMatrixPoint: function(index) {
+        this.state.matrix[index] = this.state.choose.player;
         this.setState({
             matrix: this.state.matrix
         });
