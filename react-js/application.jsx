@@ -187,43 +187,56 @@ const Content = React.createClass({
     }
 });
 
+let game;
+
+function startGame(state) {
+    game = new TicTacToe.Game(state.choose.player, state.choose.partner);
+
+    state.matrix = game.getMatrix();
+}
+
 const Application = React.createClass({
     getInitialState: function() {
-        return {
+        let state = {
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            },
-            matrix: {
-
             },
             score: {
                 player: 1,
                 partner: 1
             }
         };
+
+        startGame(state);
+
+        return state;
     },
 
     handleSetCrossChoose: function() {
-        this.setState({
+        let state = {
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            },
-            matrix: {
-
             }
-        });
+        };
+
+        startGame(state);
+
+        this.setState(state);
     },
 
     handleSetZeroChoose: function() {
-        this.setState({
+        let state = {
             choose: {
                 player: ChooseSetting.ZERO,
                 partner: ChooseSetting.CROSS
-            },
-            matrix: {}
-        });
+            }
+        };
+
+        startGame(state);
+
+        this.setState(state);
     },
 
     /**
