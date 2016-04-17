@@ -16,85 +16,6 @@ const ChooseSetting = {
     }
 };
 
-class GameBehavior
-{
-    getFirstStep() {
-        return 3;
-    }
-
-    getNextStep(matrix, player, partner) {
-
-    }
-}
-
-class GameMatrix
-{
-    setPoint() {
-
-    }
-
-    getMap() {
-
-    }
-}
-
-class GameAnswer
-{
-    construct(point, player) {
-        this._point = point;
-        this._player = player;
-    }
-
-    get point() {
-        return this._point;
-    }
-
-    get player() {
-        return this._player;
-    }
-}
-
-class Game
-{
-    constructor(player, partner, matrix, behavior) {
-        this.answer = null;
-
-        this.player = player;
-        this.partner = partner;
-
-        this.matrix = matrix;
-
-        this.behavior = behavior;
-
-        this.start();
-    }
-
-    start() {
-        if (this.player === ChooseSetting.ZERO) {
-            this.answer = new GameAnswer(this.behavior.getFirstStep(), this.partner);
-            this.answer = {
-                point: this.behavior.getFirstStep(),
-                player: this.partner
-            };
-        }
-    }
-
-    getLastAnswer() {
-        return this.answer;
-    }
-
-    setPoint() {
-
-    }
-}
-
-const GameManager = {
-    instance: null,
-    startGame: function (player, partner) {
-        this.instance = new Game(player, partner, new GameMatrix(), new GameBehavior())
-    }
-};
-
 const Result = React.createClass({
     render: function () {
         return (
@@ -294,20 +215,12 @@ const Application = React.createClass({
     },
 
     handleSetZeroChoose: function() {
-        GameManager.startGame(ChooseSetting.ZERO, ChooseSetting.CROSS);
-        let matrix = {};
-        let answer = GameManager.instance.getLastAnswer();
-
-        if (answer) {
-            matrix[answer.point] = answer.player;
-        }
-
         this.setState({
             choose: {
                 player: ChooseSetting.ZERO,
                 partner: ChooseSetting.CROSS
             },
-            matrix: matrix
+            matrix: {}
         });
     },
 
