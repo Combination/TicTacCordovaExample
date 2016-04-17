@@ -126,10 +126,10 @@ const Cell = React.createClass({
 
     render: function() {
         if (this.props.select) {
-            let className = 'btn' + ' ' + this.props.choose.className;
+            let className = 'btn' + ' ' + this.props.select.className;
 
             return (
-                <button className={className}>{this.props.choose.key}</button>
+                <button className={className}>{this.props.select.key}</button>
             );
         }
 
