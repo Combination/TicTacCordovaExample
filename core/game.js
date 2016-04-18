@@ -117,8 +117,10 @@ TicTacToe.Game.prototype.getMatrix = function () {
 TicTacToe.Game.prototype.setPoint = function (index) {
     this.matrix.set(index, this.player);
 
-    if (TicTacToe.isFinish(this.matrix)) {
-        this.over = new TicTacToe.Over(TicTacToe.winner.search(this.matrix.values));
+    var winner = TicTacToe.winner.search(this.matrix.values);
+
+    if (winner || TicTacToe.isFinish(this.matrix)) {
+        this.over = new TicTacToe.Over(winner);
     } else {
         var answer = this.behavior.getAnswer();
 
