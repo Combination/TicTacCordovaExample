@@ -1,4 +1,6 @@
 const TicTacToe = {
+    size: 3,
+    length: 9,
     winner: {
         map: [
             [0, 1, 2],
@@ -13,18 +15,45 @@ const TicTacToe = {
             [2, 4, 6]
         ],
         is: function (matrix, choose) {
-            let map = TicTacToe.winner.map;
-            for (let i = 0, length = map.length; i < length; ++i) {
-                let line = map[i];
+            var map = TicTacToe.winner.map;
+            for (var i = 0, length = map.length; i < length; ++i) {
+                var line = map[i];
 
                 if (matrix[line[0]] === choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                   return i;
+                    return i;
                 }
             }
 
             return -1;
+        },
+        search: function (matrix) {
+            var map = TicTacToe.winner.map;
+            for (var i = 0, length = map.length; i < length; ++i) {
+                var line = map[i];
+
+                var choose = matrix[line[0]];
+
+                if (choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
+                    return new TicTacToe.Winner(choose, line);
+                }
+            }
+
+            return null;
         }
+    },
+    isOver: function (matrix) {
+        return matrix.length === TicTacToe.length;
     }
+};
+
+TicTacToe.Matrix = function () {
+    this.length = 0;
+    this.values = [];
+};
+
+TicTacToe.Matrix.prototype.set = function (index, value) {
+    this.values[index] = value;
+    ++this.length;
 };
 
 TicTacToe.Choose = function () {};
@@ -35,11 +64,12 @@ TicTacToe.Choose.ZERO = new TicTacToe.Choose('o');
 TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
-    this.matrix = [];
+    this.matrix = new TicTacToe.Matrix();
     this.behavior = new TicTacToe.Behavior(this);
+    this.over = null;
 
     if (partner.instance === TicTacToe.Choose.CROSS) {
-        this.matrix[this.behavior.getFirstPoint()] = partner;
+        this.matrix.set(this.behavior.getFirstPoint(), partner);
     }
 };
 
@@ -58,12 +88,53 @@ TicTacToe.Behavior.prototype.getFirstPoint = function () {
     return this.priority[0];
 };
 
+TicTacToe.Behavior.prototype.getAnswer = function() {
+    var copy
+};
+
 TicTacToe.Game.prototype.getMatrix = function () {
-    return this.matrix;
+    return this.matrix.values;
 };
 
 TicTacToe.Game.prototype.setPoint = function (index) {
-    this.matrix[index] = this.player;
+    this.matrix.set(index, this.player);
+
+    if (TicTacToe.isOver(this.matrix)) {
+        this.over = new TicTacToe.Over(TicTacToe.winner.search(this.matrix.values));
+    }
+};
+
+/**
+ *
+ * @returns {TicTacToe.Over|null}
+ */
+TicTacToe.Game.prototype.getOver = function() {
+    return this.over;
+};
+
+TicTacToe.Over = function (winner) {
+    this.winner = winner;
+};
+
+/**
+ *
+ * @returns {TicTacToe.Winner|null}
+ */
+TicTacToe.Over.prototype.getWinner = function () {
+    return this.winner;
+};
+
+TicTacToe.Winner = function(choose, line) {
+    this.choose = choose;
+    this.line = line;
+};
+
+TicTacToe.Winner.prototype.getChoose = function () {
+    return this.choose;
+};
+
+TicTacToe.Winner.prototype.getLine = function () {
+    return this.line;
 };
 
 // TODO: need better

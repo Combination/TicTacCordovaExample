@@ -175,9 +175,11 @@ const Content = React.createClass({
             );
         }
 
+        let className = this.props.over ? 'mask' : '';
+
         return (
             <div className="content">
-                <table cellSpacing="0" cellPadding="0">
+                <table cellSpacing="0" cellPadding="0" className={className}>
                     <tbody>
                         {rows}
                     </tbody>
@@ -196,6 +198,7 @@ function startGame(state) {
     game = new TicTacToe.Game(state.choose.player, state.choose.partner);
 
     state.matrix = game.getMatrix();
+    state.over = null;
 }
 
 const Application = React.createClass({
@@ -206,8 +209,8 @@ const Application = React.createClass({
                 partner: ChooseSetting.ZERO
             },
             score: {
-                player: 1,
-                partner: 1
+                player: 0,
+                partner: 0
             }
         };
 
@@ -221,7 +224,7 @@ const Application = React.createClass({
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            }
+            },
         };
 
         startGame(state);
@@ -250,8 +253,24 @@ const Application = React.createClass({
     setMatrixPoint: function(index) {
         game.setPoint(index);
 
+        var over = game.getOver();
+
+        var score = this.state.score;
+
+        if (over && over.getWinner()) {
+            var winner = over.getWinner();
+
+            if (winner.getChoose() === game.player) {
+                ++score.player;
+            } else {
+                ++score.partner;
+            }
+        }
+
         this.setState({
-            matrix: game.getMatrix()
+            matrix: game.getMatrix(),
+            over: over,
+            score: score
         });
     },
 
@@ -273,6 +292,7 @@ const Application = React.createClass({
                     onZeroClick={this.handleSetZeroChoose}
                 />
                 <Content
+                    over={this.state.over}
                     choose={this.state.choose}
                     onClickPoint={this.setMatrixPoint}
                     matrix={this.state.matrix}
