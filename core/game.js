@@ -14,17 +14,17 @@ const TicTacToe = {
             [0, 4, 8],
             [2, 4, 6]
         ],
-        is: function (matrix, choose) {
+        get: function (matrix, choose) {
             var map = TicTacToe.winner.map;
             for (var i = 0, length = map.length; i < length; ++i) {
                 var line = map[i];
 
                 if (matrix[line[0]] === choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return i;
+                    return new TicTacToe.Winner(choose, line);
                 }
             }
 
-            return -1;
+            return null;
         },
         search: function (matrix) {
             var map = TicTacToe.winner.map;
@@ -96,16 +96,18 @@ TicTacToe.Behavior.prototype.getAnswer = function() {
 
         if (values[point]) continue;
 
-        return new TicTacToe.Answer(point);
+        this.game.matrix.set(point, this.game.partner);
+
+        return new TicTacToe.Answer(TicTacToe.winner.get(this.game.matrix.values, this.game.partner));
     }
 };
 
-TicTacToe.Answer = function (point) {
-    this.point = point;
+TicTacToe.Answer = function (winner) {
+    this.winner = winner;
 };
 
-TicTacToe.Answer.prototype.getPoint = function () {
-    return this.point;
+TicTacToe.Answer.prototype.getWinner = function () {
+    return this.winner;
 };
 
 TicTacToe.Game.prototype.getMatrix = function () {
@@ -120,7 +122,11 @@ TicTacToe.Game.prototype.setPoint = function (index) {
     } else {
         var answer = this.behavior.getAnswer();
 
-        this.matrix.set(answer.getPoint(), this.partner);
+        if (answer.getWinner()) {
+            this.over = new TicTacToe.Over(answer.getWinner());
+        } else if (TicTacToe.isFinish(this.matrix)) {
+            this.over = new TicTacToe.Over();
+        }
     }
 };
 
