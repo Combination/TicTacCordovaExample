@@ -7,91 +7,14 @@ const ChooseSetting = {
     CROSS: {
         key: Choose.CROSS,
         name: 'Крестиком',
-        className: Choose.CROSS
+        className: Choose.CROSS,
+        instance: TicTacToe.Choose.CROSS
     },
     ZERO: {
         key: Choose.ZERO,
         name: 'Ноликом',
-        className: Choose.ZERO
-    }
-};
-
-class GameBehavior
-{
-    getFirstStep() {
-        return 3;
-    }
-
-    getNextStep(matrix, player, partner) {
-
-    }
-}
-
-class GameMatrix
-{
-    setPoint() {
-
-    }
-
-    getMap() {
-
-    }
-}
-
-class GameAnswer
-{
-    construct(point, player) {
-        this._point = point;
-        this._player = player;
-    }
-
-    get point() {
-        return this._point;
-    }
-
-    get player() {
-        return this._player;
-    }
-}
-
-class Game
-{
-    constructor(player, partner, matrix, behavior) {
-        this.answer = null;
-
-        this.player = player;
-        this.partner = partner;
-
-        this.matrix = matrix;
-
-        this.behavior = behavior;
-
-        this.start();
-    }
-
-    start() {
-        if (this.player === ChooseSetting.ZERO) {
-            this.answer = new GameAnswer(this.behavior.getFirstStep(), this.partner);
-            this.answer = {
-                point: this.behavior.getFirstStep(),
-                player: this.partner
-            };
-        }
-    }
-
-    getLastAnswer() {
-        return this.answer;
-    }
-
-    setPoint() {
-
-    }
-}
-
-const GameManager = {
-    instance: null,
-    startGame: function (player, partner) {
-        this.instance = new Game(player, partner, new GameMatrix(), new GameBehavior())
+        className: Choose.ZERO,
+        instance: TicTacToe.Choose.ZERO
     }
 };
 
@@ -198,15 +121,15 @@ const Control = React.createClass({
 
 const Cell = React.createClass({
     handleClick: function () {
-        this.props.onClick(this.props.index, this.props.choose);
+        this.props.onClick(this.props.index);
     },
 
     render: function() {
         if (this.props.select) {
-            let className = 'btn' + ' ' + this.props.choose.className;
+            let className = 'btn' + ' ' + this.props.select.className;
 
             return (
-                <button className={className}>{this.props.choose.key}</button>
+                <button className={className}>{this.props.select.key}</button>
             );
         }
 
@@ -264,51 +187,59 @@ const Content = React.createClass({
     }
 });
 
+/**
+ * @type {TicTacToe.Game}
+ */
+let game;
+
+function startGame(state) {
+    game = new TicTacToe.Game(state.choose.player, state.choose.partner);
+
+    state.matrix = game.getMatrix();
+}
+
 const Application = React.createClass({
     getInitialState: function() {
-        return {
+        let state = {
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            },
-            matrix: {
-
             },
             score: {
                 player: 1,
                 partner: 1
             }
         };
+
+        startGame(state);
+
+        return state;
     },
 
     handleSetCrossChoose: function() {
-        this.setState({
+        let state = {
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            },
-            matrix: {
-
             }
-        });
+        };
+
+        startGame(state);
+
+        this.setState(state);
     },
 
     handleSetZeroChoose: function() {
-        GameManager.startGame(ChooseSetting.ZERO, ChooseSetting.CROSS);
-        let matrix = {};
-        let answer = GameManager.instance.getLastAnswer();
-
-        if (answer) {
-            matrix[answer.point] = answer.player;
-        }
-
-        this.setState({
+        let state = {
             choose: {
                 player: ChooseSetting.ZERO,
                 partner: ChooseSetting.CROSS
-            },
-            matrix: matrix
-        });
+            }
+        };
+
+        startGame(state);
+
+        this.setState(state);
     },
 
     /**
@@ -316,10 +247,11 @@ const Application = React.createClass({
      * @param index
      * @param choose
      */
-    setMatrixPoint: function(index, choose) {
-        this.state.matrix[index] = choose;
+    setMatrixPoint: function(index) {
+        game.setPoint(index);
+
         this.setState({
-            matrix: this.state.matrix
+            matrix: game.getMatrix()
         });
     },
 
