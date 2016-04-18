@@ -41,7 +41,7 @@ const TicTacToe = {
             return null;
         }
     },
-    isOver: function (matrix) {
+    isFinish: function (matrix) {
         return matrix.length === TicTacToe.length;
     }
 };
@@ -89,7 +89,23 @@ TicTacToe.Behavior.prototype.getFirstPoint = function () {
 };
 
 TicTacToe.Behavior.prototype.getAnswer = function() {
-    var copy
+    var values = this.game.matrix.values;
+
+    for (var i = 0; i < TicTacToe.length; ++i) {
+        var point = this.priority[i];
+
+        if (values[point]) continue;
+
+        return new TicTacToe.Answer(point);
+    }
+};
+
+TicTacToe.Answer = function (point) {
+    this.point = point;
+};
+
+TicTacToe.Answer.prototype.getPoint = function () {
+    return this.point;
 };
 
 TicTacToe.Game.prototype.getMatrix = function () {
@@ -99,8 +115,12 @@ TicTacToe.Game.prototype.getMatrix = function () {
 TicTacToe.Game.prototype.setPoint = function (index) {
     this.matrix.set(index, this.player);
 
-    if (TicTacToe.isOver(this.matrix)) {
+    if (TicTacToe.isFinish(this.matrix)) {
         this.over = new TicTacToe.Over(TicTacToe.winner.search(this.matrix.values));
+    } else {
+        var answer = this.behavior.getAnswer();
+
+        this.matrix.set(answer.getPoint(), this.partner);
     }
 };
 
