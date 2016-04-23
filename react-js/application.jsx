@@ -75,9 +75,7 @@ const Status = React.createClass({
     },
 
     getInitialState: function() {
-        return {
-            display: 'none'
-        };
+        return {};
     },
 
     handleClose: function() {
@@ -105,11 +103,21 @@ const Status = React.createClass({
 
 const Control = React.createClass({
     render: function() {
+        let status = null;
+
+        if (this.props.over) {
+            if (this.props.over.getWinner()) {
+                let message = (this.props.over.getWinner().getChoose() === this.props.choose.player) ? 'Вы выиграли!' : 'Вы проиграли!';
+
+                status = <Status choose={this.props.choose.player.className} message={message} />
+            } else {
+                status = <Status message='Ничья!' />;
+            }
+        }
+
         return (
             <div className="controls">
-                <Status choose={ChooseSetting.ZERO.className} message='Вы выиграли!' />
-                <Status choose={ChooseSetting.CROSS.className} message='Вы проиграли!' />
-                <Status message='Ничья!' />
+                {status}
                 <p>
                     <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
                     <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
@@ -238,7 +246,7 @@ const Application = React.createClass({
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            },
+            }
         };
 
         startGame(state);
@@ -302,6 +310,8 @@ const Application = React.createClass({
             <div className="app">
                 <Header onResetScore={this.handleResetScore} score={this.state.score} />
                 <Control
+                    over={this.state.over}
+                    choose={this.state.choose}
                     onCrossClick={this.handleSetCrossChoose}
                     onZeroClick={this.handleSetZeroChoose}
                 />
