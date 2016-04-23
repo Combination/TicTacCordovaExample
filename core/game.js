@@ -65,7 +65,7 @@ TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
     this.matrix = new TicTacToe.Matrix();
-    this.behavior = new TicTacToe.Behavior(this);
+    this.behavior = new TicTacToe.AdvanceBehavior(this);
     this.over = null;
 
     if (partner.instance === TicTacToe.Choose.CROSS) {
@@ -100,6 +100,58 @@ TicTacToe.Behavior.prototype.getAnswer = function() {
 
         return new TicTacToe.Answer(TicTacToe.winner.get(this.game.matrix.values, this.game.partner));
     }
+};
+
+TicTacToe.AdvanceBehavior = TicTacToe.Behavior;
+TicTacToe.AdvanceBehavior.prototype = new TicTacToe.Behavior();
+TicTacToe.AdvanceBehavior.prototype.priority = [
+    4, 6, 2, 0, 1, 3, 5, 7, 8
+];
+
+TicTacToe.AdvanceBehavior.prototype.getAnswer = function() {
+    var values = this.game.matrix.values;
+    var queue = [];
+
+    for (var i = 0; i < TicTacToe.length; ++i) {
+        var point = this.priority[i];
+
+        if (values[point]) continue;
+
+        queue.push(point);
+    }
+
+    for (var i = 0; i < queue.length; ++i) {
+        var point = queue[i];
+
+        var copy = values.slice();
+
+        copy[point] = this.game.partner;
+
+        var winner = TicTacToe.winner.get(copy, this.game.partner);
+
+        if (winner) {
+            this.game.matrix.set(point, this.game.partner);
+            return new TicTacToe.Answer(winner);
+        }
+    }
+
+    for (var i = 0; i < queue.length; ++i) {
+        var point = queue[i];
+
+        var copy = values.slice();
+
+        copy[point] = this.game.player;
+
+        var winner = TicTacToe.winner.get(copy, this.game.player);
+
+        if (winner) {
+            this.game.matrix.set(point, this.game.partner);
+            return new TicTacToe.Answer(null);
+        }
+    }
+
+    this.game.matrix.set(queue[0], this.game.partner);
+    return new TicTacToe.Answer(null);
 };
 
 TicTacToe.Answer = function (winner) {
