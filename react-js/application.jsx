@@ -75,9 +75,7 @@ const Status = React.createClass({
     },
 
     getInitialState: function() {
-        return {
-            display: 'none'
-        };
+        return {};
     },
 
     handleClose: function() {
@@ -105,11 +103,21 @@ const Status = React.createClass({
 
 const Control = React.createClass({
     render: function() {
+        let status = null;
+
+        if (this.props.over) {
+            if (this.props.over.getWinner()) {
+                let message = (this.props.over.getWinner().getChoose() === this.props.choose.player) ? 'Вы выиграли!' : 'Вы проиграли!';
+
+                status = <Status choose={this.props.choose.player.className} message={message} />
+            } else {
+                status = <Status message='Ничья!' />;
+            }
+        }
+
         return (
             <div className="controls">
-                <Status choose={ChooseSetting.ZERO.className} message='Вы выиграли!' />
-                <Status choose={ChooseSetting.CROSS.className} message='Вы проиграли!' />
-                <Status message='Ничья!' />
+                {status}
                 <p>
                     <ChooseButton choose={ChooseSetting.CROSS} setChoose={this.props.onCrossClick} />
                     <ChooseButton choose={ChooseSetting.ZERO} setChoose={this.props.onZeroClick} />
@@ -127,6 +135,14 @@ const Cell = React.createClass({
     render: function() {
         if (this.props.select) {
             let className = 'btn' + ' ' + this.props.select.className;
+
+            if (this.props.select.className) {
+                className += ' ' + this.props.select.className;
+            }
+
+            if (this.props.winnerPoint) {
+                className += ' ' + 'win';
+            }
 
             return (
                 <button className={className}>{this.props.select.key}</button>
@@ -153,10 +169,15 @@ const Content = React.createClass({
 
         let rows = [];
 
+        let winner = this.props.over && this.props.over.getWinner();
+
         for (let i = 0; i < 3; ++i) {
             var cols = [];
             for (let j = 0; j < 3; ++j) {
                 let index = i * 3 + j;
+
+                let winnerPoint = winner && winner.getLine().indexOf(index) > -1;
+
                 cols.push(
                     <td key={index}>
                         <Cell
@@ -165,6 +186,7 @@ const Content = React.createClass({
                             select={matrixStateList[index]}
                             choose={this.props.choose.player}
                             onClick={this.props.onClickPoint}
+                            winnerPoint={winnerPoint}
                         />
                     </td>
                 );
@@ -224,7 +246,7 @@ const Application = React.createClass({
             choose: {
                 player: ChooseSetting.CROSS,
                 partner: ChooseSetting.ZERO
-            },
+            }
         };
 
         startGame(state);
@@ -288,6 +310,8 @@ const Application = React.createClass({
             <div className="app">
                 <Header onResetScore={this.handleResetScore} score={this.state.score} />
                 <Control
+                    over={this.state.over}
+                    choose={this.state.choose}
                     onCrossClick={this.handleSetCrossChoose}
                     onZeroClick={this.handleSetZeroChoose}
                 />
