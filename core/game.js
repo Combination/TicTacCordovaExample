@@ -65,7 +65,7 @@ TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
     this.matrix = new TicTacToe.Matrix();
-    this.behavior = new TicTacToe.Behavior(this);
+    this.behavior = new TicTacToe.AdvanceBehavior(this);
     this.over = null;
 
     if (partner.instance === TicTacToe.Choose.CROSS) {
@@ -101,6 +101,9 @@ TicTacToe.Behavior.prototype.getAnswer = function() {
         return new TicTacToe.Answer(TicTacToe.winner.get(this.game.matrix.values, this.game.partner));
     }
 };
+
+TicTacToe.AdvanceBehavior = TicTacToe.Behavior;
+TicTacToe.AdvanceBehavior.prototype = new TicTacToe.Behavior();
 
 TicTacToe.Answer = function (winner) {
     this.winner = winner;

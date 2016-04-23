@@ -267,11 +267,6 @@ const Application = React.createClass({
         this.setState(state);
     },
 
-    /**
-     * TODO: WARNING wait for one point
-     * @param index
-     * @param choose
-     */
     setMatrixPoint: function(index) {
         game.setPoint(index);
 
