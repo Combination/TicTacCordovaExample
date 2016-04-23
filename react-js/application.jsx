@@ -128,6 +128,14 @@ const Cell = React.createClass({
         if (this.props.select) {
             let className = 'btn' + ' ' + this.props.select.className;
 
+            if (this.props.select.className) {
+                className += ' ' + this.props.select.className;
+            }
+
+            if (this.props.winnerPoint) {
+                className += ' ' + 'win';
+            }
+
             return (
                 <button className={className}>{this.props.select.key}</button>
             );
@@ -153,10 +161,15 @@ const Content = React.createClass({
 
         let rows = [];
 
+        let winner = this.props.over && this.props.over.getWinner();
+
         for (let i = 0; i < 3; ++i) {
             var cols = [];
             for (let j = 0; j < 3; ++j) {
                 let index = i * 3 + j;
+
+                let winnerPoint = winner && winner.getLine().indexOf(index) > -1;
+
                 cols.push(
                     <td key={index}>
                         <Cell
@@ -165,6 +178,7 @@ const Content = React.createClass({
                             select={matrixStateList[index]}
                             choose={this.props.choose.player}
                             onClick={this.props.onClickPoint}
+                            winnerPoint={winnerPoint}
                         />
                     </td>
                 );
