@@ -104,6 +104,9 @@ TicTacToe.Behavior.prototype.getAnswer = function() {
 
 TicTacToe.AdvanceBehavior = TicTacToe.Behavior;
 TicTacToe.AdvanceBehavior.prototype = new TicTacToe.Behavior();
+TicTacToe.AdvanceBehavior.prototype.priority = [
+    4, 3, 2, 1, 0, 8, 7, 6, 5
+];
 
 TicTacToe.Answer = function (winner) {
     this.winner = winner;
