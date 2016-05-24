@@ -1,5 +1,3 @@
-var webpack = require('webpack');
-
 module.exports = {
     context: __dirname,
     entry: {
@@ -22,5 +20,11 @@ module.exports = {
                 }
             }
         ]
+    },
+
+    resolve: {
+        alias: {
+            'tic-tac-toe': __dirname + '/core/game'
+        }
     }
 };

@@ -217,7 +217,4 @@ TicTacToe.Winner.prototype.getLine = function () {
     return this.line;
 };
 
-// TODO: need better
-var module = module || {};
-
 module.exports = TicTacToe;
