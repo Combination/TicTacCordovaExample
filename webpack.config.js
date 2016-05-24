@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
     context: __dirname,
     entry: {
@@ -26,5 +28,9 @@ module.exports = {
         alias: {
             'tic-tac-toe': __dirname + '/core/game'
         }
-    }
+    },
+
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+    ]
 };
