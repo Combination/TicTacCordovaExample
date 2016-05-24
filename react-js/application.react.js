@@ -2,7 +2,7 @@ const React = require('react');
 
 const TicTacToe = require('tic-tac-toe');
 
-const Title = require('./title.react');
+const Header = require('./header.react');
 
 const Choose = {
     CROSS: 'x',
@@ -23,30 +23,6 @@ const ChooseSetting = {
         instance: TicTacToe.Choose.ZERO
     }
 };
-
-const Result = React.createClass({
-    render: function () {
-        return (
-            <a className="result" onClick={this.props.onResetScore}>
-                <p>
-                    <span className="me">{this.props.score.player}</span>:<span>{this.props.score.partner}</span>
-                </p>
-                <span className="dashed"><span>Обнулить</span></span>
-            </a>
-        );
-    }
-});
-
-const Header = React.createClass({
-    render: function () {
-        return (
-            <div className="header">
-                <Title />
-                <Result score={this.props.score} onResetScore={this.props.onResetScore} />
-            </div>
-        );
-    }
-});
 
 const ChooseButton = React.createClass({
     render: function() {
