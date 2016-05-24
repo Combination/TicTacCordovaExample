@@ -1,3 +1,9 @@
+const React = require('react');
+
+const TicTacToe = require('tic-tac-toe');
+
+const Title = require('./title.react');
+
 const Choose = {
     CROSS: 'x',
     ZERO: 'o'
@@ -27,14 +33,6 @@ const Result = React.createClass({
                 </p>
                 <span className="dashed"><span>Обнулить</span></span>
             </a>
-        );
-    }
-});
-
-const Title = React.createClass({
-    render: function() {
-        return (
-            <h2><span><b>Х</b></span><span>р</span><span>е</span><span>с</span><span>т</span><span>и</span><span>к</span><span>и</span><span>-</span><span>н</span><span><b>о</b></span><span>л</span><span>и</span><span>к</span><span>и</span></h2>
         );
     }
 });
@@ -181,12 +179,12 @@ const Content = React.createClass({
                 cols.push(
                     <td key={index}>
                         <Cell
-                            key={index}
-                            index={index}
-                            select={matrixStateList[index]}
-                            choose={this.props.choose.player}
-                            onClick={this.props.onClickPoint}
-                            winnerPoint={winnerPoint}
+                        key={index}
+                        index={index}
+                        select={matrixStateList[index]}
+                        choose={this.props.choose.player}
+                        onClick={this.props.onClickPoint}
+                        winnerPoint={winnerPoint}
                         />
                     </td>
                 );
@@ -305,23 +303,20 @@ const Application = React.createClass({
             <div className="app">
                 <Header onResetScore={this.handleResetScore} score={this.state.score} />
                 <Control
-                    over={this.state.over}
-                    choose={this.state.choose}
-                    onCrossClick={this.handleSetCrossChoose}
-                    onZeroClick={this.handleSetZeroChoose}
+                over={this.state.over}
+                choose={this.state.choose}
+                onCrossClick={this.handleSetCrossChoose}
+                onZeroClick={this.handleSetZeroChoose}
                 />
                 <Content
-                    over={this.state.over}
-                    choose={this.state.choose}
-                    onClickPoint={this.setMatrixPoint}
-                    matrix={this.state.matrix}
+                over={this.state.over}
+                choose={this.state.choose}
+                onClickPoint={this.setMatrixPoint}
+                matrix={this.state.matrix}
                 />
             </div>
         );
     }
 });
 
-ReactDOM.render(
-    <Application />,
-    document.getElementById('js-app')
-);
+module.exports = Application;
