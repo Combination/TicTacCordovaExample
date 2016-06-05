@@ -2,9 +2,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import Application from 'reen/components/application';
 
-import Perf from 'react-addons-perf';
+/**
+    import Perf from 'react-addons-perf';
 
-global.Perf = Perf;
+    global.Perf = Perf;
+ */
 
 render(
     <Application />,

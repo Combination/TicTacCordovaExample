@@ -129,16 +129,8 @@ class Cell extends React.Component {
     }
 }
 
-const Content = React.createClass({
-    componentWillReceiveProps: function() {
-        this.setState(this.getInitialState());
-    },
-
-    getInitialState: function () {
-        return {};
-    },
-
-    render: function() {
+class Content extends React.Component {
+    render() {
         let matrixStateList = this.props.matrix;
 
         let rows = [];
@@ -183,7 +175,7 @@ const Content = React.createClass({
             </div>
         );
     }
-});
+}
 
 /**
  * @type {TicTacToe.Game}
