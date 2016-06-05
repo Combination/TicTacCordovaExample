@@ -6,6 +6,8 @@
 * [ITVDN] (https://youtu.be/gbTSl88k5pk)
 * [Codepen.io] (https://youtu.be/PGUMRVowdv8)
 
+* [Performance Tools] (https://facebook.github.io/react/docs/perf.html)
+
 
 ##### Webpack
 * [Getting Started] (https://youtu.be/TaWKUpahFZM)

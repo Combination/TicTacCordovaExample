@@ -1,6 +1,6 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Application = require('reen/components/application');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Application from 'reen/components/application';
 
 ReactDOM.render(
     <Application />,
