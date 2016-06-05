@@ -2,7 +2,7 @@ const React = require('react');
 
 const TicTacToe = require('tic-tac-toe');
 
-const Header = require('./header.react');
+const Header = require('reen/components/header');
 
 const Choose = {
     CROSS: 'x',

@@ -26,7 +26,8 @@ module.exports = {
 
     resolve: {
         alias: {
-            'tic-tac-toe': __dirname + '/core/game'
+            'tic-tac-toe': __dirname + '/core/game',
+            'reen': __dirname + '/react-js/js'
         }
     },
 
