@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import Application from 'reen/components/application';
 
-ReactDOM.render(
+render(
     <Application />,
     document.getElementById('js-app')
 );
