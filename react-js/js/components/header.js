@@ -1,6 +1,4 @@
-'use strict';
-
-const React = require('react');
+import React from 'react';
 
 class Title extends React.Component {
     render() {
@@ -36,4 +34,4 @@ class Header extends React.Component {
     }
 }
 
-module.exports = Header;
+export default Header;

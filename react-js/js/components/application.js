@@ -1,8 +1,8 @@
-const React = require('react');
+import React from 'react';
 
-const TicTacToe = require('tic-tac-toe');
+import TicTacToe from 'tic-tac-toe';
 
-const Header = require('reen/components/header');
+import Header from 'reen/components/header';
 
 const Choose = {
     CROSS: 'x',
@@ -295,4 +295,4 @@ const Application = React.createClass({
     }
 });
 
-module.exports = Application;
+export default Application;
