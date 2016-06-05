@@ -10,6 +10,10 @@ class Title extends React.Component {
 
 
 class Result extends React.Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.score !== nextProps.score;
+    }
+
     render() {
         return (
             <a className="result" onClick={this.props.onResetScore}>
