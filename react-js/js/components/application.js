@@ -101,12 +101,12 @@ const Control = React.createClass({
     }
 });
 
-const Cell = React.createClass({
-    handleClick: function () {
+class Cell extends React.Component {
+    handleClick() {
         this.props.onClick(this.props.index);
-    },
+    }
 
-    render: function() {
+    render() {
         if (this.props.select) {
             let className = 'btn' + ' ' + this.props.select.className;
 
@@ -124,10 +124,10 @@ const Cell = React.createClass({
         }
 
         return (
-            <button onClick={this.handleClick} className="btn"></button>
+            <button onClick={() => this.handleClick()} className="btn"></button>
         );
     }
-});
+}
 
 const Content = React.createClass({
     componentWillReceiveProps: function() {
@@ -155,12 +155,12 @@ const Content = React.createClass({
                 cols.push(
                     <td key={index}>
                         <Cell
-                        key={index}
-                        index={index}
-                        select={matrixStateList[index]}
-                        choose={this.props.choose.player}
-                        onClick={this.props.onClickPoint}
-                        winnerPoint={winnerPoint}
+                            key={index}
+                            index={index}
+                            select={matrixStateList[index]}
+                            choose={this.props.choose.player}
+                            onClick={this.props.onClickPoint}
+                            winnerPoint={winnerPoint}
                         />
                     </td>
                 );
@@ -279,16 +279,16 @@ const Application = React.createClass({
             <div className="app">
                 <Header onResetScore={this.handleResetScore} score={this.state.score} />
                 <Control
-                over={this.state.over}
-                choose={this.state.choose}
-                onCrossClick={this.handleSetCrossChoose}
-                onZeroClick={this.handleSetZeroChoose}
+                    over={this.state.over}
+                    choose={this.state.choose}
+                    onCrossClick={this.handleSetCrossChoose}
+                    onZeroClick={this.handleSetZeroChoose}
                 />
                 <Content
-                over={this.state.over}
-                choose={this.state.choose}
-                onClickPoint={this.setMatrixPoint}
-                matrix={this.state.matrix}
+                    over={this.state.over}
+                    choose={this.state.choose}
+                    onClickPoint={this.setMatrixPoint}
+                    matrix={this.state.matrix}
                 />
             </div>
         );
