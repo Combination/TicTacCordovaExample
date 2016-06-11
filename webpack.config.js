@@ -1,5 +1,20 @@
 var webpack = require('webpack');
 
+var environment = process.env.NODE_ENV || 'development';
+
+var plugins = environment === 'production' ? [
+    new webpack.DefinePlugin({
+        'process.env':{
+            'NODE_ENV': JSON.stringify(environment)
+        }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        }
+    })
+] : [];
+
 module.exports = {
     context: __dirname,
     entry: {
@@ -31,12 +46,5 @@ module.exports = {
         }
     },
 
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env':{
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin()
-    ]
+    plugins: plugins
 };
