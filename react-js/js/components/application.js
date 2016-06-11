@@ -103,6 +103,10 @@ const Control = React.createClass({
 });
 
 class Cell extends React.Component {
+    shouldComponentUpdate(props) {
+        return this.props.select !== props.select || this.props.isWinnerPoint !== props.isWinnerPoint;
+    }
+
     handleClick() {
         this.props.onClick(this.props.index);
     }
@@ -112,7 +116,7 @@ class Cell extends React.Component {
             const className = classNames(
                 'btn',
                 this.props.select.className,
-                {'win': this.props.winnerPoint}
+                {'win': this.props.isWinnerPoint}
             );
 
             return (
@@ -139,7 +143,7 @@ class Content extends React.Component {
             for (let j = 0; j < 3; ++j) {
                 let index = i * 3 + j;
 
-                let winnerPoint = winner && winner.getLine().indexOf(index) > -1;
+                let isWinnerPoint = winner && winner.getLine().indexOf(index) > -1;
 
                 cols.push(
                     <td key={index}>
@@ -147,9 +151,8 @@ class Content extends React.Component {
                             key={index}
                             index={index}
                             select={matrixStateList[index]}
-                            choose={this.props.choose.player}
                             onClick={this.props.onClickPoint}
-                            winnerPoint={winnerPoint}
+                            isWinnerPoint={isWinnerPoint}
                         />
                     </td>
                 );
@@ -275,7 +278,6 @@ const Application = React.createClass({
                 />
                 <Content
                     over={this.state.over}
-                    choose={this.state.choose}
                     onClickPoint={this.setMatrixPoint}
                     matrix={this.state.matrix}
                 />
