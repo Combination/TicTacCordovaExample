@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import TicTacToe from 'tic-tac-toe';
 
@@ -108,15 +109,11 @@ class Cell extends React.Component {
 
     render() {
         if (this.props.select) {
-            let className = 'btn' + ' ' + this.props.select.className;
-
-            if (this.props.select.className) {
-                className += ' ' + this.props.select.className;
-            }
-
-            if (this.props.winnerPoint) {
-                className += ' ' + 'win';
-            }
+            const className = classNames(
+                'btn',
+                this.props.select.className,
+                {'win': this.props.winnerPoint}
+            );
 
             return (
                 <button className={className}>{this.props.select.key}</button>
