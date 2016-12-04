@@ -14,13 +14,26 @@
   "devDependencies": {
     "babel-core": "*",
     "babel-loader": "*",
+    "babel-preset-airbnb": "*",
     "babel-preset-es2015": "*",
     "babel-preset-react": "*",
+    "enzyme": "*",
     "jest": "*",
     "react-addons-perf": "*",
+    "react-addons-test-utils": "*",
     "uglify": "*",
     "webpack": "*",
     "why-did-you-update": "*"
   },
-  "jest": {}
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "unmockedModulePathPatterns": [
+      "react",
+      "react-dom",
+      "react-addons-test-utils",
+      "enzyme"
+    ]
+  }
 }
