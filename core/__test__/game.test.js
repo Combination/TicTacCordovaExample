@@ -1,6 +1,6 @@
-jest.dontMock('./game');
+jest.dontMock('./../game');
 
-const TicTacToe = require('./game');
+const TicTacToe = require('./../game');
 
 describe('game suite', function () {
     it('example', function () {
