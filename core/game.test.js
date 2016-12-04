@@ -1,5 +1,9 @@
+jest.dontMock('./game');
+
+const TicTacToe = require('./game');
+
 describe('game suite', function () {
     it('example', function () {
-        expect(true).toBe(true);
+        expect(TicTacToe.size).toBe(3);
     });
 });
