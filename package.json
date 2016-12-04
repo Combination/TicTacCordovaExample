@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "mocha",
+    "test": "jest",
     "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
@@ -16,8 +16,7 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
-    "chai": "*",
-    "mocha": "*",
+    "jest": "^17.0.3",
     "react-addons-perf": "^15.1.0",
     "uglify": "^0.1.5",
     "webpack": "^1.13.1",
