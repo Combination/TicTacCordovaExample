@@ -1,8 +1,12 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 
+jest.dontMock('../header');
+
+const Header = require('../header');
+
 describe('game suite', function () {
     it('example', function () {
-        expect(1).toBe(1);
+        expect(shallow(<div />).contains(<div />)).toBe(true);
     });
 });
