@@ -2,7 +2,7 @@ jest.dontMock('../title');
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Title from '../title';
+import Title from 'reen/components/title';
 
 describe('title suite', function () {
     it('title', function () {

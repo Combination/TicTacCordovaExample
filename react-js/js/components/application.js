@@ -27,7 +27,7 @@ const ChooseSetting = {
 
 const ChooseButton = React.createClass({
     render: function() {
-        let className = 'btn' + ' ' + this.props.choose.className;
+        const className = 'btn' + ' ' + this.props.choose.className;
 
         return (
             <button className={className} onClick={this.props.setChoose}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
@@ -60,7 +60,7 @@ const Status = React.createClass({
     },
 
     render: function() {
-        var hideStyle = {
+        const hideStyle = {
             display: this.state.display
         };
 
@@ -132,11 +132,11 @@ class Cell extends React.Component {
 
 class Content extends React.Component {
     render() {
-        let matrixStateList = this.props.matrix;
+        const matrixStateList = this.props.matrix;
 
         let rows = [];
 
-        let winner = this.props.over && this.props.over.getWinner();
+        const winner = this.props.over && this.props.over.getWinner();
 
         for (let i = 0; i < 3; ++i) {
             var cols = [];
@@ -163,7 +163,7 @@ class Content extends React.Component {
             );
         }
 
-        let className = this.props.over ? 'mask' : '';
+        const className = this.props.over ? 'mask' : '';
 
         return (
             <div className="content">
@@ -236,7 +236,7 @@ const Application = React.createClass({
     setMatrixPoint: function(index) {
         game.setPoint(index);
 
-        var over = game.getOver();
+        const over = game.getOver();
 
         var score = this.state.score;
 
@@ -286,4 +286,4 @@ const Application = React.createClass({
     }
 });
 
-export default Application;
+export default Application

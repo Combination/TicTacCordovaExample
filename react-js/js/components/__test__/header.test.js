@@ -2,7 +2,7 @@ jest.dontMock('../header');
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../header';
+import Header from 'reen/components/header';
 
 describe('header suite', function () {
     it('header', function () {
