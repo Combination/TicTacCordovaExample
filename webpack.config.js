@@ -31,19 +31,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 include: __dirname + '/react-js',
-                loader: 'babel',
-                query: {
-                    presets: ['es2015', 'react']
-                }
+                loader: 'babel'
             }
         ]
-    },
-
-    resolve: {
-        alias: {
-            'tic-tac-toe': __dirname + '/core/game',
-            'reen': __dirname + '/react-js/js'
-        }
     },
 
     plugins: plugins
