@@ -14,6 +14,7 @@
   "devDependencies": {
     "babel-core": "*",
     "babel-loader": "*",
+    "babel-plugin-module-resolver": "*",
     "babel-preset-airbnb": "*",
     "babel-preset-es2015": "*",
     "babel-preset-react": "*",

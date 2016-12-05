@@ -7,6 +7,6 @@ import Header from '../header';
 describe('header suite', function () {
     it('header', function () {
         const wrapper = shallow(<Header />);
-        expect(wrapper.find('h2').length).toBe(1);
+        expect(wrapper.find('div.header').length).toBe(1);
     });
 });
