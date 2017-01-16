@@ -4,10 +4,6 @@ import Title from 'reen/components/title';
 import Score from 'reen/components/score';
 
 export default class extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return this.props.score !== nextProps.score;
-    }
-
     render() {
         return (
             <div className="header">

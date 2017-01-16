@@ -238,15 +238,21 @@ const Application = React.createClass({
 
         const over = game.getOver();
 
-        var score = this.state.score;
+        let score = this.state.score;
 
         if (over && over.getWinner()) {
-            var winner = over.getWinner();
+            let winner = over.getWinner();
 
             if (winner.getChoose() === game.player) {
-                ++score.player;
+                score = {
+                    player: this.state.score.player + 1,
+                    partner: this.state.score.partner
+                };
             } else {
-                ++score.partner;
+                score = {
+                    player: this.state.score.player,
+                    partner: this.state.score.partner + 1
+                };
             }
         }
 
