@@ -1,6 +1,7 @@
-const Choose = require('./choose');
-const Winner = require('./winner');
-const Over = require('./over');
+import Choose from 'tic-tac-toe/choose'
+import Winner from 'tic-tac-toe/winner'
+import Over from 'tic-tac-toe/over'
+import Matrix  from 'tic-tac-toe/matrix'
 
 const TicTacToe = {
     size: 3,
@@ -50,20 +51,10 @@ const TicTacToe = {
     }
 };
 
-TicTacToe.Matrix = function () {
-    this.length = 0;
-    this.values = [];
-};
-
-TicTacToe.Matrix.prototype.set = function (index, value) {
-    this.values[index] = value;
-    ++this.length;
-};
-
 TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
-    this.matrix = new TicTacToe.Matrix();
+    this.matrix = new Matrix();
     this.behavior = new TicTacToe.AdvanceBehavior(this);
     this.over = null;
 

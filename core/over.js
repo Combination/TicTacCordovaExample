@@ -1,4 +1,4 @@
-export default class Over {
+export default class {
     constructor(winner) {
         this.winner = winner
     }
