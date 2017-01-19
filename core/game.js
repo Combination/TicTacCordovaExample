@@ -202,4 +202,4 @@ TicTacToe.Over.prototype.getWinner = function () {
     return this.winner;
 };
 
-module.exports = TicTacToe.Game;
+export default TicTacToe.Game;
