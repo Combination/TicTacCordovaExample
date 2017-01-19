@@ -1,52 +1,9 @@
 import Choose from 'tic-tac-toe/choose'
-import Winner from 'tic-tac-toe/winner'
 import Over from 'tic-tac-toe/over'
 import Answer from 'tic-tac-toe/over'
 import Matrix from 'tic-tac-toe/matrix'
 
-const TicTacToe = {
-    length: 9,
-    winner: {
-        map: [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-
-            [0, 4, 8],
-            [2, 4, 6]
-        ],
-        get: function (matrix, choose) {
-            const map = TicTacToe.winner.map;
-            for (let i = 0, length = map.length; i < length; ++i) {
-                const line = map[i];
-
-                if (matrix[line[0]] === choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return new Winner(choose, line);
-                }
-            }
-
-            return null;
-        },
-        search: function (matrix) {
-            const map = TicTacToe.winner.map;
-            for (let i = 0, length = map.length; i < length; ++i) {
-                const line = map[i];
-
-                const choose = matrix[line[0]];
-
-                if (choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return new Winner(choose, line);
-                }
-            }
-
-            return null;
-        }
-    }
-};
+import TicTacToe from 'tic-tac-toe/manager'
 
 function isFinish(matrix) {
     return matrix.length === TicTacToe.length;
