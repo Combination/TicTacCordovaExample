@@ -4,6 +4,6 @@ const Game = require('./../game');
 
 describe('game suite', function () {
     it('example', function () {
-        // TODO
+        console.log(Game);
     });
 });

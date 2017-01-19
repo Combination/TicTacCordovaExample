@@ -1,5 +1,6 @@
-import Winner from 'tic-tac-toe/winner';
-import Choose from 'tic-tac-toe/choose';
+const Choose = require('./choose');
+const Winner = require('./winner');
+const Over = require('./over');
 
 const TicTacToe = {
     size: 3,
@@ -170,7 +171,7 @@ TicTacToe.Game.prototype.setPoint = function (index) {
     var winner = TicTacToe.winner.search(this.matrix.values);
 
     if (winner || TicTacToe.isFinish(this.matrix)) {
-        this.over = new TicTacToe.Over(winner);
+        this.over = new Over(winner);
     } else {
         var answer = this.behavior.getAnswer();
 
@@ -183,23 +184,10 @@ TicTacToe.Game.prototype.setPoint = function (index) {
 };
 
 /**
- *
- * @returns {TicTacToe.Over|null}
+ * @returns {Over|null}
  */
 TicTacToe.Game.prototype.getOver = function() {
     return this.over;
-};
-
-TicTacToe.Over = function (winner) {
-    this.winner = winner;
-};
-
-/**
- *
- * @returns {Winner|null}
- */
-TicTacToe.Over.prototype.getWinner = function () {
-    return this.winner;
 };
 
 export default TicTacToe.Game;
