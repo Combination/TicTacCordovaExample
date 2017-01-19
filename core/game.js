@@ -1,6 +1,7 @@
 import Choose from 'tic-tac-toe/choose'
 import Winner from 'tic-tac-toe/winner'
 import Over from 'tic-tac-toe/over'
+import Answer from 'tic-tac-toe/over'
 import Matrix  from 'tic-tac-toe/matrix'
 
 const TicTacToe = {
@@ -88,7 +89,7 @@ TicTacToe.Behavior.prototype.getAnswer = function() {
 
         this.game.matrix.set(point, this.game.partner);
 
-        return new TicTacToe.Answer(TicTacToe.winner.get(this.game.matrix.values, this.game.partner));
+        return new Answer(TicTacToe.winner.get(this.game.matrix.values, this.game.partner));
     }
 };
 
@@ -121,7 +122,7 @@ TicTacToe.AdvanceBehavior.prototype.getAnswer = function() {
 
         if (winner) {
             this.game.matrix.set(point, this.game.partner);
-            return new TicTacToe.Answer(winner);
+            return new Answer(winner);
         }
     }
 
@@ -136,20 +137,12 @@ TicTacToe.AdvanceBehavior.prototype.getAnswer = function() {
 
         if (winner) {
             this.game.matrix.set(point, this.game.partner);
-            return new TicTacToe.Answer(null);
+            return new Answer(null);
         }
     }
 
     this.game.matrix.set(queue[0], this.game.partner);
-    return new TicTacToe.Answer(null);
-};
-
-TicTacToe.Answer = function (winner) {
-    this.winner = winner;
-};
-
-TicTacToe.Answer.prototype.getWinner = function () {
-    return this.winner;
+    return new Answer(null);
 };
 
 TicTacToe.Game.prototype.getMatrix = function () {
