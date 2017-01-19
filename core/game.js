@@ -1,4 +1,5 @@
 import Winner from 'tic-tac-toe/winner';
+import Choose from 'tic-tac-toe/choose';
 
 const TicTacToe = {
     size: 3,
@@ -58,11 +59,6 @@ TicTacToe.Matrix.prototype.set = function (index, value) {
     ++this.length;
 };
 
-TicTacToe.Choose = function () {};
-
-TicTacToe.Choose.CROSS = new TicTacToe.Choose('x');
-TicTacToe.Choose.ZERO = new TicTacToe.Choose('o');
-
 TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
@@ -70,7 +66,7 @@ TicTacToe.Game = function (player, partner) {
     this.behavior = new TicTacToe.AdvanceBehavior(this);
     this.over = null;
 
-    if (partner.instance === TicTacToe.Choose.CROSS) {
+    if (partner.instance === Choose.CROSS) {
         this.matrix.set(this.behavior.getFirstPoint(), partner);
     }
 };
@@ -206,4 +202,4 @@ TicTacToe.Over.prototype.getWinner = function () {
     return this.winner;
 };
 
-module.exports = TicTacToe;
+module.exports = TicTacToe.Game;
