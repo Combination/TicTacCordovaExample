@@ -4,7 +4,6 @@ import Over from 'tic-tac-toe/over'
 import Matrix  from 'tic-tac-toe/matrix'
 
 const TicTacToe = {
-    size: 3,
     length: 9,
     winner: {
         map: [
