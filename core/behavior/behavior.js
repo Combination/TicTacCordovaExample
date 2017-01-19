@@ -1,7 +1,7 @@
 export default class {
     constructor(game, priority) {
         this.game = game
-        this.priotity = priority
+        this.priority = priority
     }
 
     getFirstPoint() {
