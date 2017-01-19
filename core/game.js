@@ -44,11 +44,12 @@ const TicTacToe = {
 
             return null;
         }
-    },
-    isFinish: function (matrix) {
-        return matrix.length === TicTacToe.length;
     }
 };
+
+function isFinish(matrix) {
+    return matrix.length === TicTacToe.length;
+}
 
 TicTacToe.Game = function (player, partner) {
     this.player = player;
@@ -160,14 +161,14 @@ TicTacToe.Game.prototype.setPoint = function (index) {
 
     var winner = TicTacToe.winner.search(this.matrix.values);
 
-    if (winner || TicTacToe.isFinish(this.matrix)) {
+    if (winner || isFinish(this.matrix)) {
         this.over = new Over(winner);
     } else {
         var answer = this.behavior.getAnswer();
 
         if (answer.getWinner()) {
             this.over = new Over(answer.getWinner());
-        } else if (TicTacToe.isFinish(this.matrix)) {
+        } else if (isFinish(this.matrix)) {
             this.over = new Over();
         }
     }
