@@ -166,9 +166,9 @@ TicTacToe.Game.prototype.setPoint = function (index) {
         var answer = this.behavior.getAnswer();
 
         if (answer.getWinner()) {
-            this.over = new TicTacToe.Over(answer.getWinner());
+            this.over = new Over(answer.getWinner());
         } else if (TicTacToe.isFinish(this.matrix)) {
-            this.over = new TicTacToe.Over();
+            this.over = new Over();
         }
     }
 };
