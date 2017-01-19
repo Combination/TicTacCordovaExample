@@ -1,7 +1,21 @@
-import Behavior from 'tic-tac-toe/behavior';
+import Behavior from 'tic-tac-toe/behavior/behavior';
+import Manager from 'tic-tac-toe/manager'
+import Answer from 'tic-tac-toe/over'
 
 export default class extends Behavior {
     constructor(game) {
         super(game, [8, 7, 6, 5, 4, 3, 2, 1, 0])
+    }
+
+    getAnswer() {
+        for (let i = 0; i < Manager.length; ++i) {
+            let point = this.priority[i];
+
+            if (this.game.matrix.values[point]) continue;
+
+            this.game.matrix.set(point, this.game.partner);
+
+            return new Answer(Manager.winner.get(this.game.matrix.values, this.game.partner));
+        }
     }
 }
