@@ -1,3 +1,7 @@
+const Choose = require('./choose');
+const Winner = require('./winner');
+const Over = require('./over');
+
 const TicTacToe = {
     size: 3,
     length: 9,
@@ -20,7 +24,7 @@ const TicTacToe = {
                 var line = map[i];
 
                 if (matrix[line[0]] === choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return new TicTacToe.Winner(choose, line);
+                    return new Winner(choose, line);
                 }
             }
 
@@ -34,7 +38,7 @@ const TicTacToe = {
                 var choose = matrix[line[0]];
 
                 if (choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return new TicTacToe.Winner(choose, line);
+                    return new Winner(choose, line);
                 }
             }
 
@@ -56,11 +60,6 @@ TicTacToe.Matrix.prototype.set = function (index, value) {
     ++this.length;
 };
 
-TicTacToe.Choose = function () {};
-
-TicTacToe.Choose.CROSS = new TicTacToe.Choose('x');
-TicTacToe.Choose.ZERO = new TicTacToe.Choose('o');
-
 TicTacToe.Game = function (player, partner) {
     this.player = player;
     this.partner = partner;
@@ -68,7 +67,7 @@ TicTacToe.Game = function (player, partner) {
     this.behavior = new TicTacToe.AdvanceBehavior(this);
     this.over = null;
 
-    if (partner.instance === TicTacToe.Choose.CROSS) {
+    if (partner.instance === Choose.CROSS) {
         this.matrix.set(this.behavior.getFirstPoint(), partner);
     }
 };
@@ -172,7 +171,7 @@ TicTacToe.Game.prototype.setPoint = function (index) {
     var winner = TicTacToe.winner.search(this.matrix.values);
 
     if (winner || TicTacToe.isFinish(this.matrix)) {
-        this.over = new TicTacToe.Over(winner);
+        this.over = new Over(winner);
     } else {
         var answer = this.behavior.getAnswer();
 
@@ -185,36 +184,10 @@ TicTacToe.Game.prototype.setPoint = function (index) {
 };
 
 /**
- *
- * @returns {TicTacToe.Over|null}
+ * @returns {Over|null}
  */
 TicTacToe.Game.prototype.getOver = function() {
     return this.over;
 };
 
-TicTacToe.Over = function (winner) {
-    this.winner = winner;
-};
-
-/**
- *
- * @returns {TicTacToe.Winner|null}
- */
-TicTacToe.Over.prototype.getWinner = function () {
-    return this.winner;
-};
-
-TicTacToe.Winner = function(choose, line) {
-    this.choose = choose;
-    this.line = line;
-};
-
-TicTacToe.Winner.prototype.getChoose = function () {
-    return this.choose;
-};
-
-TicTacToe.Winner.prototype.getLine = function () {
-    return this.line;
-};
-
-module.exports = TicTacToe;
+export default TicTacToe.Game;
