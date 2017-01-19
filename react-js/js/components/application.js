@@ -1,27 +1,28 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import TicTacToe from 'tic-tac-toe';
+import Game from 'tic-tac-toe/game';
+import Choose from 'tic-tac-toe/choose';
 
 import Header from 'reen/components/header';
 
-const Choose = {
+const ChooseSymbols = {
     CROSS: 'x',
     ZERO: 'o'
 };
 
 const ChooseSetting = {
     CROSS: {
-        key: Choose.CROSS,
+        key: ChooseSymbols.CROSS,
         name: 'Крестиком',
-        className: Choose.CROSS,
-        instance: TicTacToe.Choose.CROSS
+        className: ChooseSymbols.CROSS,
+        instance: Choose.CROSS
     },
     ZERO: {
-        key: Choose.ZERO,
+        key: ChooseSymbols.ZERO,
         name: 'Ноликом',
-        className: Choose.ZERO,
-        instance: TicTacToe.Choose.ZERO
+        className: ChooseSymbols.ZERO,
+        instance: Choose.ZERO
     }
 };
 
@@ -178,12 +179,12 @@ class Content extends React.Component {
 }
 
 /**
- * @type {TicTacToe.Game}
+ * @type {Game}
  */
 let game;
 
 function startGame(state) {
-    game = new TicTacToe.Game(state.choose.player, state.choose.partner);
+    game = new Game(state.choose.player, state.choose.partner);
 
     state.matrix = game.getMatrix();
     state.over = null;

@@ -8,7 +8,7 @@
     [
       "module-resolver", {
         "alias": {
-          "tic-tac-toe": "./core/game",
+          "tic-tac-toe": "./core",
           "reen": "./react-js/js"
         }
       }

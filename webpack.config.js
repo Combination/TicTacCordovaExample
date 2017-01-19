@@ -32,6 +32,11 @@ module.exports = {
                 test: /\.js$/,
                 include: __dirname + '/react-js',
                 loader: 'babel'
+            },
+            {
+                test: /\.js$/,
+                include: __dirname + '/core',
+                loader: 'babel'
             }
         ]
     },
