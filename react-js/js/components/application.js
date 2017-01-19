@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import TicTacToe from 'tic-tac-toe';
+import TicTacToe from 'tic-tac-toe/game';
 
 import Header from 'reen/components/header';
 

@@ -1,3 +1,5 @@
+import Winner from 'tic-tac-toe/winner';
+
 const TicTacToe = {
     size: 3,
     length: 9,
@@ -20,7 +22,7 @@ const TicTacToe = {
                 var line = map[i];
 
                 if (matrix[line[0]] === choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return new TicTacToe.Winner(choose, line);
+                    return new Winner(choose, line);
                 }
             }
 
@@ -34,7 +36,7 @@ const TicTacToe = {
                 var choose = matrix[line[0]];
 
                 if (choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
-                    return new TicTacToe.Winner(choose, line);
+                    return new Winner(choose, line);
                 }
             }
 
@@ -198,23 +200,10 @@ TicTacToe.Over = function (winner) {
 
 /**
  *
- * @returns {TicTacToe.Winner|null}
+ * @returns {Winner|null}
  */
 TicTacToe.Over.prototype.getWinner = function () {
     return this.winner;
-};
-
-TicTacToe.Winner = function(choose, line) {
-    this.choose = choose;
-    this.line = line;
-};
-
-TicTacToe.Winner.prototype.getChoose = function () {
-    return this.choose;
-};
-
-TicTacToe.Winner.prototype.getLine = function () {
-    return this.line;
 };
 
 module.exports = TicTacToe;
