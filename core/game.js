@@ -2,7 +2,7 @@ import Choose from 'tic-tac-toe/choose'
 import Winner from 'tic-tac-toe/winner'
 import Over from 'tic-tac-toe/over'
 import Answer from 'tic-tac-toe/over'
-import Matrix  from 'tic-tac-toe/matrix'
+import Matrix from 'tic-tac-toe/matrix'
 
 const TicTacToe = {
     length: 9,
@@ -20,9 +20,9 @@ const TicTacToe = {
             [2, 4, 6]
         ],
         get: function (matrix, choose) {
-            var map = TicTacToe.winner.map;
-            for (var i = 0, length = map.length; i < length; ++i) {
-                var line = map[i];
+            const map = TicTacToe.winner.map;
+            for (let i = 0, length = map.length; i < length; ++i) {
+                const line = map[i];
 
                 if (matrix[line[0]] === choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
                     return new Winner(choose, line);
@@ -32,11 +32,11 @@ const TicTacToe = {
             return null;
         },
         search: function (matrix) {
-            var map = TicTacToe.winner.map;
-            for (var i = 0, length = map.length; i < length; ++i) {
-                var line = map[i];
+            const map = TicTacToe.winner.map;
+            for (let i = 0, length = map.length; i < length; ++i) {
+                const line = map[i];
 
-                var choose = matrix[line[0]];
+                const choose = matrix[line[0]];
 
                 if (choose && matrix[line[1]] === choose && matrix[line[2]] === choose) {
                     return new Winner(choose, line);
@@ -80,12 +80,10 @@ TicTacToe.Behavior.prototype.getFirstPoint = function () {
 };
 
 TicTacToe.Behavior.prototype.getAnswer = function() {
-    var values = this.game.matrix.values;
+    for (let i = 0; i < TicTacToe.length; ++i) {
+        let point = this.priority[i];
 
-    for (var i = 0; i < TicTacToe.length; ++i) {
-        var point = this.priority[i];
-
-        if (values[point]) continue;
+        if (this.game.matrix.values[point]) continue;
 
         this.game.matrix.set(point, this.game.partner);
 
@@ -100,25 +98,25 @@ TicTacToe.AdvanceBehavior.prototype.priority = [
 ];
 
 TicTacToe.AdvanceBehavior.prototype.getAnswer = function() {
-    var values = this.game.matrix.values;
-    var queue = [];
+    let values = this.game.matrix.values;
+    let queue = [];
 
-    for (var i = 0; i < TicTacToe.length; ++i) {
-        var point = this.priority[i];
+    for (let i = 0; i < TicTacToe.length; ++i) {
+        let point = this.priority[i];
 
         if (values[point]) continue;
 
         queue.push(point);
     }
 
-    for (var i = 0; i < queue.length; ++i) {
-        var point = queue[i];
+    for (let i = 0; i < queue.length; ++i) {
+        let point = queue[i];
 
-        var copy = values.slice();
+        let copy = values.slice();
 
         copy[point] = this.game.partner;
 
-        var winner = TicTacToe.winner.get(copy, this.game.partner);
+        let winner = TicTacToe.winner.get(copy, this.game.partner);
 
         if (winner) {
             this.game.matrix.set(point, this.game.partner);
@@ -126,14 +124,14 @@ TicTacToe.AdvanceBehavior.prototype.getAnswer = function() {
         }
     }
 
-    for (var i = 0; i < queue.length; ++i) {
-        var point = queue[i];
+    for (let i = 0; i < queue.length; ++i) {
+        let point = queue[i];
 
-        var copy = values.slice();
+        let copy = values.slice();
 
         copy[point] = this.game.player;
 
-        var winner = TicTacToe.winner.get(copy, this.game.player);
+        let winner = TicTacToe.winner.get(copy, this.game.player);
 
         if (winner) {
             this.game.matrix.set(point, this.game.partner);
@@ -152,12 +150,12 @@ TicTacToe.Game.prototype.getMatrix = function () {
 TicTacToe.Game.prototype.setPoint = function (index) {
     this.matrix.set(index, this.player);
 
-    var winner = TicTacToe.winner.search(this.matrix.values);
+    let winner = TicTacToe.winner.search(this.matrix.values);
 
     if (winner || isFinish(this.matrix)) {
         this.over = new Over(winner);
     } else {
-        var answer = this.behavior.getAnswer();
+        let answer = this.behavior.getAnswer();
 
         if (answer.getWinner()) {
             this.over = new Over(answer.getWinner());
