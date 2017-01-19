@@ -52,22 +52,7 @@ function isFinish(matrix) {
     return matrix.length === TicTacToe.length;
 }
 
-TicTacToe.Game = function (player, partner) {
-    this.player = player;
-    this.partner = partner;
-    this.matrix = new Matrix();
-    this.behavior = new TicTacToe.AdvanceBehavior(this);
-    this.over = null;
-
-    if (partner.instance === Choose.CROSS) {
-        this.matrix.set(this.behavior.getFirstPoint(), partner);
-    }
-};
-
 TicTacToe.Behavior = function (game) {
-    /**
-     * @type {TicTacToe.Game}
-     */
     this.game = game;
 };
 
@@ -143,33 +128,42 @@ TicTacToe.AdvanceBehavior.prototype.getAnswer = function() {
     return new Answer(null);
 };
 
-TicTacToe.Game.prototype.getMatrix = function () {
-    return this.matrix.values;
-};
+export default class {
+    constructor(player, partner) {
+        this.player = player;
+        this.partner = partner;
+        this.matrix = new Matrix();
+        this.behavior = new TicTacToe.AdvanceBehavior(this);
+        this.over = null;
 
-TicTacToe.Game.prototype.setPoint = function (index) {
-    this.matrix.set(index, this.player);
-
-    let winner = TicTacToe.winner.search(this.matrix.values);
-
-    if (winner || isFinish(this.matrix)) {
-        this.over = new Over(winner);
-    } else {
-        let answer = this.behavior.getAnswer();
-
-        if (answer.getWinner()) {
-            this.over = new Over(answer.getWinner());
-        } else if (isFinish(this.matrix)) {
-            this.over = new Over();
+        if (partner.instance === Choose.CROSS) {
+            this.matrix.set(this.behavior.getFirstPoint(), partner);
         }
     }
-};
 
-/**
- * @returns {Over|null}
- */
-TicTacToe.Game.prototype.getOver = function() {
-    return this.over;
-};
+    getMatrix() {
+        return this.matrix.values;
+    }
 
-export default TicTacToe.Game;
+    setPoint(index) {
+        this.matrix.set(index, this.player);
+
+        let winner = TicTacToe.winner.search(this.matrix.values);
+
+        if (winner || isFinish(this.matrix)) {
+            this.over = new Over(winner);
+        } else {
+            let answer = this.behavior.getAnswer();
+
+            if (answer.getWinner()) {
+                this.over = new Over(answer.getWinner());
+            } else if (isFinish(this.matrix)) {
+                this.over = new Over();
+            }
+        }
+    }
+
+    getOver() {
+        return this.over;
+    }
+};
