@@ -58,11 +58,27 @@ test('SequenceBehavior', function (t) {
 
 
 test('AdvanceBehavior', function (t) {
-    t.plan(1);
+    t.plan(3);
     let matrix = new Matrix();
     const player = Choose.CROSS;
     const partner = Choose.ZERO;
 
     const behavior = new AdvanceBehavior(matrix, player, partner);
     t.ok(behavior.getFirstPoint() === 4);
+
+    matrix.set(4, player);
+    behavior.getAnswer();
+    t.deepEqual(matrix.values, {
+        4: player,
+        6: partner
+    });
+
+    matrix.set(3, player);
+    behavior.getAnswer();
+    t.deepEqual(matrix.values, {
+        4: player,
+        6: partner,
+        3: player,
+        5: partner
+    });
 });
