@@ -11,7 +11,7 @@ export default class extends Behavior {
     }
 
     getAnswer() {
-        let values = this.game.matrix.values;
+        let values = this.matrix.values;
         let queue = [];
 
         for (let i = 0; i < Manager.length; ++i) {
@@ -27,12 +27,12 @@ export default class extends Behavior {
 
             let copy = values.slice();
 
-            copy[point] = this.game.partner;
+            copy[point] = this.partner;
 
-            let winner = Manager.winner.get(copy, this.game.partner);
+            let winner = Manager.winner.get(copy, this.partner);
 
             if (winner) {
-                this.game.matrix.set(point, this.game.partner);
+                this.partner.set(point, this.partner);
                 return new Answer(winner);
             }
         }
@@ -42,17 +42,17 @@ export default class extends Behavior {
 
             let copy = values.slice();
 
-            copy[point] = this.game.player;
+            copy[point] = this.player;
 
-            let winner = Manager.winner.get(copy, this.game.player);
+            let winner = Manager.winner.get(copy, this.player);
 
             if (winner) {
-                this.game.matrix.set(point, this.game.partner);
+                this.partner.set(point, this.partner);
                 return new Answer(null);
             }
         }
 
-        this.game.matrix.set(queue[0], this.game.partner);
+        this.partner.set(queue[0], this.partner);
         return new Answer(null);
     }
 }

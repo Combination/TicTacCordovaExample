@@ -14,11 +14,11 @@ export default class extends Behavior {
         for (let i = 0; i < Manager.length; ++i) {
             let point = this.priority[i];
 
-            if (this.game.matrix.values[point]) continue;
+            if (this.matrix.values[point]) continue;
 
-            this.game.matrix.set(point, this.game.partner);
+            this.matrix.set(point, this.partner);
 
-            return new Answer(Manager.winner.get(this.game.matrix.values, this.game.partner));
+            return new Answer(Manager.winner.get(this.matrix.values, this.partner));
         }
     }
 }
