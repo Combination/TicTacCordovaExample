@@ -22,6 +22,7 @@
     "jest": "*",
     "react-addons-perf": "*",
     "react-addons-test-utils": "*",
+    "tape": "^4.6.3",
     "uglify": "*",
     "webpack": "*",
     "why-did-you-update": "*"
