@@ -56,8 +56,7 @@ test('SequenceBehavior', function (t) {
     t.deepEqual(winner.getLine(), [6, 7, 8]);
 });
 
-
-test('AdvanceBehavior Tie', function (t) {
+test('AdvanceBehavior tie', function (t) {
     t.plan(4);
     let matrix = new Matrix();
     const player = Choose.CROSS;
@@ -93,4 +92,24 @@ test('AdvanceBehavior Tie', function (t) {
         7: player,
         1: partner
     });
+});
+
+test('AdvanceBehavior win', function (t) {
+    t.plan(2);
+    let matrix = new Matrix();
+    const player = Choose.CROSS;
+    const partner = Choose.ZERO;
+
+    const behavior = new AdvanceBehavior(matrix, player, partner);
+    matrix.set(4, player);
+    behavior.getAnswer();
+
+    matrix.set(1, player);
+    behavior.getAnswer();
+
+    matrix.set(3, player);
+    const winner = behavior.getAnswer().getWinner();
+
+    t.ok(winner.getChoose() === partner);
+    t.deepEqual(winner.getLine(), [6, 7, 8]);
 });
