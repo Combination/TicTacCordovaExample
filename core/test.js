@@ -27,8 +27,8 @@ test('Matrix', function(t) {
     });
 });
 
-test('SequenceBehavior', function (t) {
-    t.plan(6);
+test('SequenceBehavior Winner', function (t) {
+    t.plan(8);
 
     let matrix = new Matrix();
     const player = Choose.ZERO;
@@ -48,4 +48,9 @@ test('SequenceBehavior', function (t) {
 
     matrix.set(1, player);
     t.ok(behavior.getAnswer().getWinner() === null);
+    matrix.set(2, player);
+    const winner = behavior.getAnswer().getWinner();
+
+    t.ok(winner.getChoose() === partner);
+    t.deepEqual(winner.getLine(), [6, 7, 8]);
 });
