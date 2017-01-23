@@ -32,7 +32,7 @@ export default class extends Behavior {
             let winner = Manager.winner.get(copy, this.partner);
 
             if (winner) {
-                this.partner.set(point, this.partner);
+                this.matrix.set(point, this.partner);
                 return new Answer(winner);
             }
         }
@@ -47,12 +47,12 @@ export default class extends Behavior {
             let winner = Manager.winner.get(copy, this.player);
 
             if (winner) {
-                this.partner.set(point, this.partner);
+                this.matrix.set(point, this.partner);
                 return new Answer(null);
             }
         }
 
-        this.partner.set(queue[0], this.partner);
+        this.matrix.set(queue[0], this.partner);
         return new Answer(null);
     }
 }
