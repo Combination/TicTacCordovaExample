@@ -11,48 +11,48 @@ export default class extends Behavior {
     }
 
     getAnswer() {
-        let values = this.matrix.values;
-        let queue = [];
+        let values = this.matrix.values
+        let queue = []
 
         for (let i = 0; i < Manager.length; ++i) {
-            let point = this.priority[i];
+            let point = this.priority[i]
 
-            if (values[point]) continue;
+            if (values[point]) continue
 
-            queue.push(point);
+            queue.push(point)
         }
 
         for (let i = 0; i < queue.length; ++i) {
-            let point = queue[i];
+            let point = queue[i]
 
-            let copy = values.slice();
+            let copy = values.slice()
 
-            copy[point] = this.partner;
+            copy[point] = this.partner
 
-            let winner = Manager.winner.get(copy, this.partner);
+            let winner = Manager.winner.get(copy, this.partner)
 
             if (winner) {
-                this.matrix.set(point, this.partner);
-                return new Answer(winner);
+                this.matrix.set(point, this.partner)
+                return new Answer(winner)
             }
         }
 
         for (let i = 0; i < queue.length; ++i) {
-            let point = queue[i];
+            let point = queue[i]
 
-            let copy = values.slice();
+            let copy = values.slice()
 
-            copy[point] = this.player;
+            copy[point] = this.player
 
-            let winner = Manager.winner.get(copy, this.player);
+            let winner = Manager.winner.get(copy, this.player)
 
             if (winner) {
-                this.matrix.set(point, this.partner);
-                return new Answer(null);
+                this.matrix.set(point, this.partner)
+                return new Answer(null)
             }
         }
 
-        this.matrix.set(queue[0], this.partner);
-        return new Answer(null);
+        this.matrix.set(queue[0], this.partner)
+        return new Answer(null)
     }
 }
