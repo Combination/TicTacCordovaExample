@@ -57,8 +57,8 @@ test('SequenceBehavior', function (t) {
 });
 
 
-test('AdvanceBehavior', function (t) {
-    t.plan(3);
+test('AdvanceBehavior Tie', function (t) {
+    t.plan(4);
     let matrix = new Matrix();
     const player = Choose.CROSS;
     const partner = Choose.ZERO;
@@ -80,5 +80,17 @@ test('AdvanceBehavior', function (t) {
         6: partner,
         3: player,
         5: partner
+    });
+
+    matrix.set(7, player);
+    behavior.getAnswer();
+
+    t.deepEqual(matrix.values, {
+        4: player,
+        6: partner,
+        3: player,
+        5: partner,
+        7: player,
+        1: partner
     });
 });
