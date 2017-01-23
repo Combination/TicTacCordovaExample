@@ -16,7 +16,7 @@ test('Matrix', function(t) {
     matrix.set(8, Choose.ZERO);
     matrix.set(3, Choose.CROSS);
 
-    t.ok(matrix.length === 5)
+    t.ok(matrix.length === 5);
 
     t.deepEqual(matrix.values, {
         1: Choose.CROSS,
@@ -28,21 +28,24 @@ test('Matrix', function(t) {
 });
 
 test('SequenceBehavior', function (t) {
-    t.plan(5)
+    t.plan(6);
 
-    let matrix = new Matrix()
-    const player = Choose.ZERO
-    const partner = Choose.CROSS
+    let matrix = new Matrix();
+    const player = Choose.ZERO;
+    const partner = Choose.CROSS;
 
-    const behavior = new SequenceBehavior(matrix, player, partner)
+    const behavior = new SequenceBehavior(matrix, player, partner);
 
-    t.ok(behavior.getFirstPoint() === 8)
-    t.deepEqual(matrix.values, [])
+    t.ok(behavior.getFirstPoint() === 8);
+    t.deepEqual(matrix.values, []);
 
     let answer = behavior.getAnswer();
     t.ok(answer.getWinner() === null);
     t.deepEqual(matrix.values, {
         8: partner
-    })
-    t.ok(matrix.length === 1)
+    });
+    t.ok(matrix.length === 1);
+
+    matrix.set(1, player);
+    t.ok(behavior.getAnswer().getWinner() === null);
 });
