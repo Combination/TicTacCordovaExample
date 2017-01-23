@@ -1,6 +1,7 @@
 import test from 'tape';
 import Matrix from 'tic-tac-toe/matrix'
 import SequenceBehavior from 'tic-tac-toe/behavior/sequence'
+import AdvanceBehavior from 'tic-tac-toe/behavior/advance'
 import Choose from 'tic-tac-toe/choose'
 
 test('Matrix', function(t) {
@@ -27,7 +28,7 @@ test('Matrix', function(t) {
     });
 });
 
-test('SequenceBehavior Winner', function (t) {
+test('SequenceBehavior', function (t) {
     t.plan(8);
 
     let matrix = new Matrix();
@@ -53,4 +54,15 @@ test('SequenceBehavior Winner', function (t) {
 
     t.ok(winner.getChoose() === partner);
     t.deepEqual(winner.getLine(), [6, 7, 8]);
+});
+
+
+test('AdvanceBehavior', function (t) {
+    t.plan(1);
+    let matrix = new Matrix();
+    const player = Choose.CROSS;
+    const partner = Choose.ZERO;
+
+    const behavior = new AdvanceBehavior(matrix, player, partner);
+    t.ok(behavior.getFirstPoint() === 4);
 });
