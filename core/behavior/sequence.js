@@ -3,8 +3,11 @@ import Manager from 'tic-tac-toe/manager'
 import Answer from 'tic-tac-toe/over'
 
 export default class extends Behavior {
-    constructor(game) {
-        super(game, [8, 7, 6, 5, 4, 3, 2, 1, 0])
+    constructor(matrix, player, partner) {
+        super([8, 7, 6, 5, 4, 3, 2, 1, 0])
+        this.matrix = matrix
+        this.player = player
+        this.partner = partner
     }
 
     getAnswer() {

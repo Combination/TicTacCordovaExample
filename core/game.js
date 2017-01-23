@@ -11,10 +11,11 @@ function isFinish(matrix) {
 
 export default class {
     constructor(player, partner) {
+        let matrix = new Matrix();
         this.player = player;
         this.partner = partner;
-        this.matrix = new Matrix();
-        this.behavior = new AdvanceBehavior(this);
+        this.matrix = matrix;
+        this.behavior = new AdvanceBehavior(matrix, player, partner);
         this.over = null;
 
         if (partner.instance === Choose.CROSS) {
