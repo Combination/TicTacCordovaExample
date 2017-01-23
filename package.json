@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "node core/test.js",
+    "test": "babel-tape-runner core/test.js",
     "test-jest": "jest",
     "build": "NODE_ENV=production webpack"
   },
@@ -19,6 +19,7 @@
     "babel-preset-airbnb": "*",
     "babel-preset-es2015": "*",
     "babel-preset-react": "*",
+    "babel-tape-runner": "^2.0.1",
     "enzyme": "*",
     "jest": "*",
     "react-addons-perf": "*",
