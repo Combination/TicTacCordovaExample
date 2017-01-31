@@ -1,8 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import GameFactory from 'tic-tac-toe/game.factory';
-import Behavior from 'tic-tac-toe/behavior/advance';
 import Choose from 'tic-tac-toe/choose';
 
 import Header from 'reen/components/header';
@@ -172,19 +170,6 @@ class Content extends React.Component {
     }
 }
 
-const gameFactory = new GameFactory(Behavior);
-/**
- * @type {Game}
- */
-let game;
-
-function startGame(state) {
-    game = gameFactory.create(state.choose.player, state.choose.partner);
-
-    state.matrix = game.getMatrix();
-    state.over = null;
-}
-
 export default class extends React.Component {
     constructor(props) {
         super(props);
@@ -200,7 +185,7 @@ export default class extends React.Component {
             }
         };
 
-        startGame(state);
+        this.restartGame(state);
 
         this.state = state;
     }
@@ -213,7 +198,7 @@ export default class extends React.Component {
             }
         };
 
-        startGame(state);
+        this.restartGame(state);
 
         this.setState(state);
     }
@@ -226,20 +211,27 @@ export default class extends React.Component {
             }
         };
 
-        startGame(state);
+        this.restartGame(state);
 
         this.setState(state);
     }
 
+    restartGame(state) {
+        this.game = this.props.gameFactory.create(state.choose.player, state.choose.partner);
+
+        state.matrix = this.game.getMatrix();
+        state.over = null;
+    }
+
     setMatrixPoint(index) {
-        const over = game.play(index);
+        const over = this.game.play(index);
 
         let score = this.state.score;
 
         if (over && over.getWinner()) {
             let winner = over.getWinner();
 
-            if (winner.getChoose() === game.player) {
+            if (winner.getChoose() === this.game.player) {
                 score = {
                     player: this.state.score.player + 1,
                     partner: this.state.score.partner
@@ -253,7 +245,7 @@ export default class extends React.Component {
         }
 
         this.setState({
-            matrix: game.getMatrix(),
+            matrix: this.game.getMatrix(),
             over: over,
             score: score
         });

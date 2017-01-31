@@ -1,6 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDom from 'react-dom';
 import Application from 'reen/components/application';
+import GameFactory from 'tic-tac-toe/game.factory';
+import Behavior from 'tic-tac-toe/behavior/advance';
 
 /**
  * For browser performance
@@ -11,7 +13,7 @@ import Application from 'reen/components/application';
     global.Perf = Perf;
  */
 
-render(
-    <Application />,
+ReactDom.render(
+    <Application gameFactory={new GameFactory(Behavior)} />,
     document.getElementById('js-app')
 );
