@@ -11,7 +11,7 @@ global.document = jsdom('');
 global.window = document.defaultView;
 
 test('application suite', function (t) {
-    t.plan(12);
+    t.plan(14);
     const wrapper = mount(<Application gameFactory={new GameFactory(Behavior)} />);
     const cells = wrapper.find('div.content button');
     t.ok(cells.length === 9);
@@ -24,4 +24,7 @@ test('application suite', function (t) {
     centerCell.simulate('click');
     t.ok(centerCell.hasClass('x'));
     t.ok(centerCell.text() === 'x');
+    const centralResponseCell = cells.at(8);
+    t.ok(centralResponseCell.hasClass('o'));
+    t.ok(centralResponseCell.text() === 'o');
 });
