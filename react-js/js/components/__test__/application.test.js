@@ -11,7 +11,7 @@ global.document = jsdom('');
 global.window = document.defaultView;
 
 test('application suite', function (t) {
-    t.plan(14);
+    t.plan(23);
     const wrapper = mount(<Application gameFactory={new GameFactory(Behavior)} />);
     const cells = wrapper.find('div.content button');
     t.ok(cells.length === 9);
@@ -20,11 +20,27 @@ test('application suite', function (t) {
         t.ok(cell.text() === '');
     });
 
-    const centerCell = cells.at(4);
-    centerCell.simulate('click');
-    t.ok(centerCell.hasClass('x'));
-    t.ok(centerCell.text() === 'x');
-    const centralResponseCell = cells.at(8);
-    t.ok(centralResponseCell.hasClass('o'));
-    t.ok(centralResponseCell.text() === 'o');
+    const playerSequence = [3, 4];
+    const partnerSequence = [8, 7];
+
+    for (let index in playerSequence) {
+        const playerCell = cells.at(playerSequence[index]);
+        playerCell.simulate('click');
+        t.ok(playerCell.hasClass('x'));
+        t.ok(playerCell.text() === 'x');
+        const partnerResponseCell = cells.at(partnerSequence[index]);
+        t.ok(partnerResponseCell.hasClass('o'));
+        t.ok(partnerResponseCell.text() === 'o');
+    }
+
+    const winnerCell = cells.at(5);
+    winnerCell.simulate('click');
+    t.ok(winnerCell.hasClass('x'));
+    t.ok(winnerCell.text() === 'x');
+
+    const winnerSequence = [3, 4, 5];
+    for (let index in winnerSequence) {
+        const winnerCell = cells.at(winnerSequence[index]);
+        t.ok(winnerCell.hasClass('x'));
+    }
 });
