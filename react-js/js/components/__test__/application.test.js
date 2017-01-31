@@ -9,5 +9,6 @@ import Behavior from 'tic-tac-toe/behavior/sequence';
 test('application suite', function (t) {
     t.plan(1);
     const wrapper = render(<Application gameFactory={new GameFactory(Behavior)} />);
-    t.ok(true);
+    const cells = wrapper.find('div.content button');
+    t.ok(cells.length === 9);
 });
