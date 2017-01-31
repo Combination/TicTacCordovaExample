@@ -11,13 +11,13 @@ global.document = jsdom('');
 global.window = document.defaultView;
 
 test('application suite', function (t) {
-    t.plan(25);
+    t.plan(26);
     const wrapper = mount(<Application gameFactory={new GameFactory(Behavior)} />);
     const cells = wrapper.find('div.content button');
-    t.ok(cells.length === 9);
+    t.equal(cells.length, 9);
 
     cells.forEach(function (cell) {
-        t.ok(cell.text() === '');
+        t.equal(cell.text(), '');
     });
 
     const playerSequence = [3, 4];
@@ -27,16 +27,16 @@ test('application suite', function (t) {
         const playerCell = cells.at(playerSequence[index]);
         playerCell.simulate('click');
         t.ok(playerCell.hasClass('x'));
-        t.ok(playerCell.text() === 'x');
+        t.equal(playerCell.text(), 'x');
         const partnerResponseCell = cells.at(partnerSequence[index]);
         t.ok(partnerResponseCell.hasClass('o'));
-        t.ok(partnerResponseCell.text() === 'o');
+        t.equal(partnerResponseCell.text(), 'o');
     }
 
     const winnerCell = cells.at(5);
     winnerCell.simulate('click');
     t.ok(winnerCell.hasClass('x'));
-    t.ok(winnerCell.text() === 'x');
+    t.equal(winnerCell.text(), 'x');
 
     const winnerSequence = [3, 4, 5];
     for (let index in winnerSequence) {
@@ -47,4 +47,6 @@ test('application suite', function (t) {
     const status = wrapper.find('div.controls p.status');
     t.ok(status.hasClass('x'));
     t.equal(status.find('span').text(), 'Вы выиграли!');
+    const score = wrapper.find('div.header a.result');
+    t.equal(score.find('span.me').text(), '1');
 });
