@@ -16,7 +16,6 @@ export default class {
         this.partner = partner;
         this.matrix = matrix;
         this.behavior = new AdvanceBehavior(matrix, player, partner);
-        this.over = null;
 
         if (partner.instance === Choose.CROSS) {
             this.matrix.set(this.behavior.getFirstPoint(), partner);
@@ -27,25 +26,23 @@ export default class {
         return this.matrix.values;
     }
 
-    setPoint(index) {
+    play(index) {
         this.matrix.set(index, this.player);
 
-        let winner = TicTacToe.winner.search(this.matrix.values);
+        const winner = TicTacToe.winner.search(this.matrix.values);
 
         if (winner || isFinish(this.matrix)) {
-            this.over = new Over(winner);
-        } else {
-            let answer = this.behavior.getAnswer();
-
-            if (answer.getWinner()) {
-                this.over = new Over(answer.getWinner());
-            } else if (isFinish(this.matrix)) {
-                this.over = new Over();
-            }
+            return new Over(winner);
         }
-    }
 
-    getOver() {
-        return this.over;
+        const answer = this.behavior.getAnswer();
+
+        if (answer.getWinner()) {
+            return new Over(answer.getWinner());
+        }
+
+        if (isFinish(this.matrix)) {
+            return new Over();
+        }
     }
 };

@@ -1,9 +1,9 @@
 export default class {
     constructor(winner) {
-        this.winner = winner
+        this.winner = winner;
     }
 
     getWinner() {
-        return this.winner
+        return this.winner;
     }
 }

@@ -235,9 +235,7 @@ const Application = React.createClass({
     },
 
     setMatrixPoint: function(index) {
-        game.setPoint(index);
-
-        const over = game.getOver();
+        const over = game.play(index);
 
         let score = this.state.score;
 
