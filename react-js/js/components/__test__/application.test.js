@@ -11,7 +11,7 @@ global.document = jsdom('');
 global.window = document.defaultView;
 
 test('application suite', function (t) {
-    t.plan(10);
+    t.plan(12);
     const wrapper = mount(<Application gameFactory={new GameFactory(Behavior)} />);
     const cells = wrapper.find('div.content button');
     t.ok(cells.length === 9);
@@ -19,4 +19,9 @@ test('application suite', function (t) {
     cells.forEach(function (cell) {
         t.ok(cell.text() === '');
     });
+
+    const centerCell = cells.at(4);
+    centerCell.simulate('click');
+    t.ok(centerCell.hasClass('x'));
+    t.ok(centerCell.text() === 'x');
 });
