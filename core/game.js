@@ -3,19 +3,18 @@ import Over from 'tic-tac-toe/over'
 import Matrix from 'tic-tac-toe/matrix'
 
 import TicTacToe from 'tic-tac-toe/manager'
-import AdvanceBehavior from 'tic-tac-toe/behavior/advance'
 
 function isFinish(matrix) {
     return matrix.length === TicTacToe.length;
 }
 
 export default class {
-    constructor(player, partner) {
+    constructor(player, partner, Behavior) {
         let matrix = new Matrix();
         this.player = player;
         this.partner = partner;
         this.matrix = matrix;
-        this.behavior = new AdvanceBehavior(matrix, player, partner);
+        this.behavior = new Behavior(matrix, player, partner);
 
         if (partner.instance === Choose.CROSS) {
             this.matrix.set(this.behavior.getFirstPoint(), partner);
