@@ -23,6 +23,7 @@
     "enzyme": "*",
     "react-addons-perf": "*",
     "react-addons-test-utils": "*",
+    "spy": "^1.0.0",
     "tape": "^4.6.3",
     "uglify": "*",
     "webpack": "*",
