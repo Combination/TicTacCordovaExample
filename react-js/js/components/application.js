@@ -5,6 +5,7 @@ import Game from 'tic-tac-toe/game';
 import Choose from 'tic-tac-toe/choose';
 
 import Header from 'reen/components/header';
+import CloseButton from 'reen/components/close';
 
 const ChooseSymbols = {
     CROSS: 'x',
@@ -35,14 +36,6 @@ const ChooseButton = React.createClass({
         );
     }
 });
-
-class CloseButton extends React.Component {
-    render() {
-        return (
-            <a href="javascript:void(0)" className="close" onClick={this.props.action}>✕</a>
-        );
-    }
-}
 
 const Status = React.createClass({
     propTypes: {
