@@ -60,7 +60,10 @@ class Status extends React.Component {
         }
 
         return (
-            <p className={className} style={hideStyle}>{this.props.message}<CloseButton action={() => this.handleClose()} /></p>
+            <p className={className} style={hideStyle}>
+                <span>{this.props.message}</span>
+                <CloseButton action={() => this.handleClose()} />
+            </p>
         );
     }
 }
