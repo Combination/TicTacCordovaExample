@@ -21,6 +21,7 @@
     "babel-preset-react": "*",
     "babel-tape-runner": "^2.0.1",
     "enzyme": "*",
+    "jsdom": "^9.9.1",
     "react-addons-perf": "*",
     "react-addons-test-utils": "*",
     "spy": "^1.0.0",
