@@ -1,15 +1,14 @@
-jest.dontMock('../header');
-
+import test from 'tape';
 import React from 'react';
 import { shallow } from 'enzyme';
 import Header from 'reen/components/header';
 
-describe('header suite', function () {
-    it('first score', function () {
-        const wrapper = shallow(
-            <Header />
-        );
+test('header suite', function(t) {
+    t.plan(1);
 
-        expect(wrapper.find('.header').length).toBe(1);
-    });
+    const wrapper = shallow(
+        <Header />
+    );
+
+    t.ok(wrapper.find('.header').length === 1);
 });

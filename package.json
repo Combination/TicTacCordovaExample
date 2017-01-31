@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "babel-tape-runner core/test.js",
-    "test-jest": "jest",
+    "test-core": "babel-tape-runner core/test.js",
+    "test-react": "babel-tape-runner react-js/js/components/__test__/*",
     "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
@@ -21,23 +21,11 @@
     "babel-preset-react": "*",
     "babel-tape-runner": "^2.0.1",
     "enzyme": "*",
-    "jest": "*",
     "react-addons-perf": "*",
     "react-addons-test-utils": "*",
     "tape": "^4.6.3",
     "uglify": "*",
     "webpack": "*",
     "why-did-you-update": "*"
-  },
-  "jest": {
-    "transform": {
-      ".*": "<rootDir>/node_modules/babel-jest"
-    },
-    "unmockedModulePathPatterns": [
-      "react",
-      "react-dom",
-      "react-addons-test-utils",
-      "enzyme"
-    ]
   }
 }

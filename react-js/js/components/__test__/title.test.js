@@ -1,12 +1,11 @@
-jest.dontMock('../title');
+import test from 'tape';
 
 import React from 'react';
 import { shallow } from 'enzyme';
 import Title from 'reen/components/title';
 
-describe('title suite', function () {
-    it('title', function () {
-        const wrapper = shallow(<Title />);
-        expect(wrapper.find('h2').length).toBe(1);
-    });
+test('title suite', function (t) {
+    t.plan(1);
+    const wrapper = shallow(<Title />);
+    t.ok(wrapper.find('h2').length === 1);
 });
