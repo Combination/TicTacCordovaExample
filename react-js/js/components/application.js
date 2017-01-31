@@ -185,8 +185,10 @@ function startGame(state) {
     state.over = null;
 }
 
-const Application = React.createClass({
-    getInitialState: function() {
+export default class extends React.Component {
+    constructor(props) {
+        super(props);
+
         let state = {
             choose: {
                 player: ChooseSetting.CROSS,
@@ -200,10 +202,10 @@ const Application = React.createClass({
 
         startGame(state);
 
-        return state;
-    },
+        this.state = state;
+    }
 
-    handleSetCrossChoose: function() {
+    handleSetCrossChoose() {
         let state = {
             choose: {
                 player: ChooseSetting.CROSS,
@@ -214,9 +216,9 @@ const Application = React.createClass({
         startGame(state);
 
         this.setState(state);
-    },
+    }
 
-    handleSetZeroChoose: function() {
+    handleSetZeroChoose() {
         let state = {
             choose: {
                 player: ChooseSetting.ZERO,
@@ -227,9 +229,9 @@ const Application = React.createClass({
         startGame(state);
 
         this.setState(state);
-    },
+    }
 
-    setMatrixPoint: function(index) {
+    setMatrixPoint(index) {
         const over = game.play(index);
 
         let score = this.state.score;
@@ -255,35 +257,33 @@ const Application = React.createClass({
             over: over,
             score: score
         });
-    },
+    }
 
-    handleResetScore: function() {
+    handleResetScore() {
         this.setState({
             score: {
                 player: 0,
                 partner: 0
             }
         })
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <div className="app">
-                <Header onResetScore={this.handleResetScore} score={this.state.score} />
+                <Header onResetScore={() => this.handleResetScore()} score={this.state.score} />
                 <Control
                     over={this.state.over}
                     choose={this.state.choose}
-                    onCrossClick={this.handleSetCrossChoose}
-                    onZeroClick={this.handleSetZeroChoose}
+                    onCrossClick={() => this.handleSetCrossChoose()}
+                    onZeroClick={() => this.handleSetZeroChoose()}
                 />
                 <Content
                     over={this.state.over}
-                    onClickPoint={this.setMatrixPoint}
+                    onClickPoint={(point) => this.setMatrixPoint(point)}
                     matrix={this.state.matrix}
                 />
             </div>
         );
     }
-});
-
-export default Application
+};
