@@ -36,23 +36,19 @@ const ChooseButton = React.createClass({
     }
 });
 
-const Status = React.createClass({
-    propTypes: {
-        message: React.PropTypes.string.isRequired,
-        choose: React.PropTypes.string
-    },
+class Status extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
-    getInitialState: function() {
-        return {};
-    },
-
-    handleClose: function() {
+    handleClose() {
         this.setState({
             display: 'none'
         });
-    },
+    }
 
-    render: function() {
+    render() {
         const hideStyle = {
             display: this.state.display
         };
@@ -64,10 +60,10 @@ const Status = React.createClass({
         }
 
         return (
-            <p className={className} style={hideStyle}>{this.props.message}<CloseButton action={this.handleClose} /></p>
+            <p className={className} style={hideStyle}>{this.props.message}<CloseButton action={() => this.handleClose()} /></p>
         );
     }
-});
+}
 
 const Control = React.createClass({
     render: function() {
