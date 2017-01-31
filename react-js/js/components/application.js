@@ -26,15 +26,15 @@ const ChooseSetting = {
     }
 };
 
-const ChooseButton = React.createClass({
-    render: function() {
+class ChooseButton extends React.Component {
+    render() {
         const className = 'btn' + ' ' + this.props.choose.className;
 
         return (
             <button className={className} onClick={this.props.setChoose}>Начать новую игру <br/> <b>{this.props.choose.name}</b></button>
         );
     }
-});
+}
 
 class Status extends React.Component {
     constructor(props) {
