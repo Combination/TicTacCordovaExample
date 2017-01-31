@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Game from 'tic-tac-toe/game';
+import GameFactory from 'tic-tac-toe/game.factory';
+import Behavior from 'tic-tac-toe/behavior/advance';
 import Choose from 'tic-tac-toe/choose';
 
 import Header from 'reen/components/header';
@@ -171,13 +172,14 @@ class Content extends React.Component {
     }
 }
 
+const gameFactory = new GameFactory(Behavior);
 /**
  * @type {Game}
  */
 let game;
 
 function startGame(state) {
-    game = new Game(state.choose.player, state.choose.partner);
+    game = gameFactory.create(state.choose.player, state.choose.partner);
 
     state.matrix = game.getMatrix();
     state.over = null;
