@@ -11,7 +11,7 @@ global.document = jsdom('');
 global.window = document.defaultView;
 
 test('application suite', function (t) {
-    t.plan(23);
+    t.plan(25);
     const wrapper = mount(<Application gameFactory={new GameFactory(Behavior)} />);
     const cells = wrapper.find('div.content button');
     t.ok(cells.length === 9);
@@ -43,4 +43,8 @@ test('application suite', function (t) {
         const winnerCell = cells.at(winnerSequence[index]);
         t.ok(winnerCell.hasClass('x'));
     }
+
+    const status = wrapper.find('div.controls p.status');
+    t.ok(status.hasClass('x'));
+    t.equal(status.find('span').text(), 'Вы выиграли!');
 });

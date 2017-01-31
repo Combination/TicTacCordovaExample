@@ -31,12 +31,12 @@ module.exports = {
             {
                 test: /\.js$/,
                 include: __dirname + '/react-js',
-                loader: 'babel'
+                loader: 'babel-loader'
             },
             {
                 test: /\.js$/,
                 include: __dirname + '/core',
-                loader: 'babel'
+                loader: 'babel-loader'
             }
         ]
     },
