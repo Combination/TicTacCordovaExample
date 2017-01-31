@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "babel-tape-runner core/test.js",
-    "test-jest": "jest",
+    "test-react": "babel-tape-runner react-js/js/components/__test__/*",
     "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
