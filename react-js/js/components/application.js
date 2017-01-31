@@ -65,8 +65,8 @@ class Status extends React.Component {
     }
 }
 
-const Control = React.createClass({
-    render: function() {
+class Control extends React.Component {
+    render() {
         let status = null;
 
         if (this.props.over) {
@@ -89,7 +89,7 @@ const Control = React.createClass({
             </div>
         );
     }
-});
+}
 
 class Cell extends React.Component {
     shouldComponentUpdate(props) {
